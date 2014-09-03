@@ -1,0 +1,146 @@
+\input{../header.tex}
+
+\begin{document}
+
+\title{Discrete Analysis, 3rd semester}
+
+\author{Фёдор Алексеев}
+
+\maketitle
+\tableofcontents\newpage{}
+
+\part{Лекция 1. Оценки и асимпотики комбинаторных величин}
+
+\begin{example} Рассмотрим задачу.
+
+  Пусть $n = 4k, k \in \mathbb{N}$. Рассмотрим граф 
+  \begin{align*}
+	G = (V,E)\mbox{: } &V = \left\{A \subset \left\{1, 2, \ldots, n\right\}| |A| = 2k\right\}, \\
+	&E = \left\{ \left\{ A,B \right\}| |A \cap B| = k \right\}.
+  \end{align*}
+
+  Факты:
+  \begin{enumerate}
+	\item Сколько вершин в $G$? $|V| = C_n^{n/2}$
+	\item Сколько рёбер? $|E| = C_n^{n/2} \cdot \left( C_{n/2}^{n/4} \right)^2 \cdot \frac{1}{2}$
+	\item Сколько треугольников? 
+	  \begin{align*}
+		&\frac{1}{6} \cdot C_n^{n/2} \cdot \left( C_{n/2}^{n/4} \right)^2 \cdot 
+		\sum_{i=0}^{n/4}\left( C_{n/4}^{i} \right)^2 \cdot \left( C_{n/4}^{n/4-i} \right)^2 = \\
+		&\frac{1}{6} \cdot C_n^{n/2} \cdot \left( C_{n/2}^{n/4} \right)^2 \cdot \sum_{i=0}^{n/4}\left( C_{n/4}^{i} \right)^4
+	  \end{align*}
+  \end{enumerate}
+\end{example}
+
+\begin{claim}
+  \(
+	C_{n}^{0} < C_{n}^{1} < C_{n}^{2} < \ldots < C_{n}^{n/2} = C_{n}^{n/2} > \ldots
+  \).
+\end{claim}
+
+\begin{claim}
+  $C_{2n}^{n} < 2^{2n}$.
+\end{claim}
+
+\begin{claim}
+  $C_{2n}^{n} > \frac{2^{2n}}{2n+1}$.
+\end{claim}
+
+\begin{remark*}
+  Оба факта показываются из того, что $\sum_{i=0}^{2n}C_{2n}^{i} = 2^{2n}$.
+\end{remark*}
+
+\begin{define*}
+  $a \sim b \Leftrightarrow \lim_{n\to\infty}\frac{a}{b} = 1 \Leftrightarrow a = b + o(1)$.
+\end{define*}
+
+\begin{remark*}
+  Верна формула Стирлинга: $\boxed{n! \sim \sqrt{2\pi n}\left( \frac{n}{e} \right)^n}$.
+\end{remark*}
+
+\begin{claim}
+  $C_{2n}^{n} \sim \frac{2^{2n}}{\sqrt{\pi n}}$.
+\end{claim}
+
+\begin{remark*}
+  Ещё одна аналитическая запись:
+  \begin{align*}
+	a > 1  \Rightarrow	f(n) = (a+o(1))^n \Rightarrow \ln{f(n)} = n\ln{a+o(1)} \sim n\ln{a} \\
+	(\nRightarrow f(n) \sim a^n).
+  \end{align*}
+  Тогда
+  $
+  \left.
+  \begin{aligned}
+	\ln(C_{2n}^{n}) &<&2n\ln2 &\\
+	\ln(C_{2n}^{n}) &>&2n\ln2 &- \ln(2n+1) \sim 2n\ln2
+  \end{aligned}
+  \right|
+  \Rightarrow \ln(C_{2n}^{n}) \sim 2n\ln2  \Rightarrow C_{2n}^{n} = (2 + o(1))^{2n} = (4 + o(1))^n
+  $
+\end{remark*}
+
+\begin{Th}
+  Пусть $a \in (0, 1)$. Тогда $C_{n}^{[an]} = \left( \frac{1}{a^a(1-a)^{1-a}} + o(1) \right)^n$.
+\end{Th}
+\begin{proof}
+  \begin{remark*}
+	При $a=\frac{1}{2}$ $C^{[n/2]}_{n} = \left( \frac1{\left(\frac12 \right)^{\frac12}\left( \frac12 \right)^\frac12} + o(1) \right)^n$.
+  \end{remark*}
+  \begin{remark*}
+	$\frac1{a^a(1-a)^{1-a}} = e^{\overbrace{-a\ln{a} - (1-a)\ln(1-a)}^{\mbox{энтропия}}}$. Поэтому доказываем мы энтропийные оценки.
+  \end{remark*}
+
+  Перейдём к доказательству.
+  $$
+	C_{n}^{[an]} = \frac{n!}{[an]!(n-[an])!} \sim
+	\frac{\sqrt{2\pi n}(\frac{n}{e})^n}{\sqrt{2\pi [an]}(\frac{[an]}{e})^{[an]} \sqrt{2\pi (n-[an])}(\frac{n-[an]}{e})^{n-[an]}} \\
+  $$
+
+  Допустим пока, будто нет \texttt{[]}~--- целых частей. Тогда получим:
+  \begin{multline*}
+	\underbrace{\frac{\sqrt{2\pi n}}{\sqrt{2\pi an}\sqrt{2\pi (n-an)}}}_{P(n)} \cdot 
+	\left( \frac{n}{e} \right)^n \cdot \left( \frac{an}{e} \right)^{-an} \cdot \left( \frac{n-an}{e} \right)^{-n+an} = \\
+	P(n) \cdot \frac{1}{a^{an}(1-a){n-an}} = P(n) \cdot \left( \frac{1}{a^a \cdot (1-a)^(1-a)} \right)^n =
+	\left( \frac{1}{a^a \cdot (1-a)^{1-a}} + o(1) \right)^n
+  \end{multline*}
+
+  А почему можно избавиться от целых частей? Под корнем --- не важно, можно загнать в $P$. А вот $[an]^{[an]}$.
+  \begin{align*}
+	[an]^{[an]} = (an-\varepsilon)^{an-\varepsilon} = (an)^{an-\varepsilon}(1-\frac{\varepsilon}{an})^{an-\varepsilon} \sim
+	(an)^{an}\underbrace{(an)^{-\varepsilon}e^{-\varepsilon}}_{\mbox{добавим в $P(n)$}}.
+  \end{align*}
+\end{proof}
+
+\begin{exercise}
+  Проверить для $(n-[an])^{n-[an]}$.
+\end{exercise}
+
+\begin{exercise} (Важное) \\
+  Докажите, что $P([a_1n], [a_2n], [a_3n], \ldots, [a_kn]) = \left( \frac{(\sum{a_i})^{\sum{a_i}}}{\prod{a_i^{a_i}}} + o(1)\right)$.
+\end{exercise}
+
+\begin{exercise}
+  Пусть $f(n) \sim an, a \in (0, 1)$. Тогда $C_{n}^{f(n)} = \left( \frac{1}{a^a(1-a)^{1-a}} + o(1) \right)^n$.
+\end{exercise}
+
+\begin{Th}
+  \begin{enumerate}
+	\item $C_{n}^{k} \le \frac{n^k}{k!}$
+	\item $C_{n}^{k} \sim \frac{n^k}{k!}$, если $k^2 = o(n)$
+	\item $C_{n}^{k} = \frac{n^k}{k!} * e^{-\frac{k(k-1)}{2n} + O(\frac{k^3}{r^2})}$
+  \end{enumerate}
+\end{Th}
+
+\begin{proof}
+  Для начала, $C_{n}^{k} = \frac{n(n-1)\cdots(n-k+1)}{k!} \le \frac{n^k}{k!}$. Чуть аккуратнее:
+  \begin{multline*}
+	C_{n}^{k} = \frac{n(n-1)\cdots(n-k+1)}{k!} = \frac{n^k}{k!}(1-\frac1n)(1-\frac2n)\cdots(1-\frac{k-1}{n}) = \\
+	\frac{n^k}{k!}e^{\ln(1-\frac1n) + \ln(1-\frac2n) +\ldots+\ln(1-\frac{k-1}{n})} = 
+	\frac{n^k}{k!}e^{-\frac1n + O(\frac1n) -\frac2n + O(\frac4{n^2}) + \ldots - \frac{k-1}{n} + O(\frac{(k-1)^2}{n^2})} = \\
+	\frac{n^k}{k!}e^{-\frac{k(k-1)}{2n} + O(\frac{k^3}{n^2})}.
+  \end{multline*}
+\end{proof}
+
+\end{document}
+
