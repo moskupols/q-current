@@ -1,0 +1,51 @@
+\documentclass[oneside,russian]{amsart}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+\usepackage[russian]{babel}
+\usepackage{amsthm}
+\usepackage{amstext}
+\usepackage{amssymb}
+\usepackage{mathdots}
+\usepackage[unicode=true,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+
+\makeatletter
+
+%\DeclareRobustCommand{\cyrtext}{%
+%  \fontencoding{T2A}\selectfont\def\encodingdefault{T2A}}
+%\DeclareRobustCommand{\textcyr}[1]{\leavevmode{\cyrtext #1}}
+%\AtBeginDocument{\DeclareFontEncoding{T2A}{}{}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+%\numberwithin{equation}{section}
+%\numberwithin{figure}{section}
+ \theoremstyle{definition}
+ \newtheorem*{define*}{\protect\definitionname}
+ \theoremstyle{plain}
+ \newtheorem{Th}{\protect\theoremname}
+ \theoremstyle{remark}
+ \newtheorem{remark}{\protect\remarkname}
+ \theoremstyle{definition}
+ \newtheorem{exercise}{\protect\exercisename}
+ \theoremstyle{remark}
+ \newtheorem{claim}{\protect\claimname}
+ \theoremstyle{definition}
+ \newtheorem{example}{\protect\examplename}
+ \theoremstyle{plain}
+ \newtheorem{lem}{\protect\lemmaname}
+
+\makeatother
+  \providecommand{\claimname}{Утверждение}
+  \providecommand{\definitionname}{Определение}
+  \providecommand{\examplename}{Пример}
+  \providecommand{\exercisename}{Упражнение}
+  \providecommand{\lemmaname}{Лемма}
+  \providecommand{\remarkname}{Замечание}
+  \providecommand{\theoremname}{Теорема}
+

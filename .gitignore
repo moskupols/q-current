@@ -1,0 +1,10 @@
+.session.vim
+*.aux
+*.log
+*.out
+*.toc
+
+*.dvi
+*.pdf
+*.ps
+
