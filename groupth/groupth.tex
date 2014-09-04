@@ -1,0 +1,181 @@
+\input{../header.tex}
+
+\begin{document}
+
+\title{Group theory}
+
+\author{Фёдор Алексеев}
+
+\maketitle
+\tableofcontents\newpage{}
+
+\part{Лекция 1. Группа, подгруппа. Изоморфизм групп.}
+\section{Группа}
+\begin{define*}
+  \emph{Группа}~--- это множество $G$ с определённой на нём бинарной операцией (т.\,е. $\forall a, b \in G$ определён результат операции $a\cdot b \in G$)
+  \begin{description}
+	\item[1. Ассоциативность] $\forall a, b, c \in G \to (a\cdot b)\cdot c = a \cdot (b \cdot c)$;
+	\item[2. Наличие нейтрального элемента] $\exists e \in G: \forall a \in G \to a\cdot e = e\cdot a$;
+	\item[3. Наличие обратного элемента] $\forall g \in G \to \exists g^{-1} \in G: g\cdot g^{-1} = g^{-1}\cdot g = e$.
+  \end{description}
+  Группа \emph{абелева}(\emph{коммутативная}), если $\forall a, b \in G \to a\cdot b = b\cdot a$.
+\end{define*}
+
+\begin{remark*}
+  Произведение $g_1 \cdot g_2 \cdot \cdots \cdot g_n$ также не зависит от порядка.
+\end{remark*}
+
+\begin{claim}
+  $\forall g \in G \to \exists! g^{-1}$.
+\end{claim}
+
+\begin{proof}
+  Пусть $a$~--- левый обратный к $g$ (т.\,е. $ag = e$),
+  $b$~--- правый обратный к $g$ (т.\,е. $gb = e$). Докажем, что $a=b$:
+  \begin{equation*}
+	b = eb = (ag)b = a(gb) = ae = a
+  \end{equation*}
+\end{proof}
+
+\begin{exercise}
+  Условие 3 из определения можно заменить на $\forall g \in G \to \exists g^{-1}$~--- правый обратный.
+\end{exercise}
+
+\begin{example}
+	$(\mathbb{Z}, +)$
+\end{example}
+
+\begin{example}
+  $(\mathbb{R}, +)$, и даже $(F, +)$.
+\end{example}
+
+\begin{example}
+  $(\mathbb{R}\backslash\{0\}, 0)$, и даже $F^* = (F\backslash\{0\}, \cdot)$.
+\end{example}
+
+\begin{remark*}
+  Более общо, если $R$~--- кольцо, то $(R, +)$ и $(R^*, \cdot)$ --- абелевы группы ($R^*$ --- множество обратимых элементов $R$).
+  Хорошо бы доказать, впрочем, что если $a, b \in R^*$, то $ab \in R^*$:
+  \begin{equation*}
+	ab(ab)^{-1} = abb^{-1}a^{-1} = aa^{-1} = e
+  \end{equation*}
+\end{remark*}
+
+\begin{example}
+  $M_{n\times n}(F)$ --- кольцо. $(M_{n\times n})^* = GL(F)$ --- мультипликативная группа невырожденных матриц $n\times n$.
+\end{example}
+
+\begin{example}
+  $(\mathbb{Z}_n, +)$ и $(\mathbb{Z}_n^*, \cdot)$, где $\mathbb{Z}_n^*$ --- все взаимно простые с $n$.
+\end{example}
+
+\begin{proof}
+  Если $(a, n) \neq 1$, то $ka \not\equiv 1 \pmod{n}$. Если $(a, n) = 1$, то $\exists u, v: au + nv = a	\Rightarrow	au \equiv 1 \pmod{n}$
+\end{proof}
+Значит $|\mathbb{Z}_n^*| = \varphi(n)$.
+
+\begin{define*}
+  \emph{Порядок группы} G --- это количество её элементов $|G|$.
+\end{define*}
+
+\begin{example}
+  Пусть $S_n$ --- все перестановки множества $[n] = \left\{ 1, \ldots, n \right\}$, т.\,е. биекции $[n] \to [n]$. Тогда $(S_n, \circ)$ --- группа.
+
+  Если $\Omega$ --- произвольное множество, то аналогичное множество будем обозначать $S(\Omega)$. Это тоже группа.
+\end{example}
+
+\section{Подгруппы. Изоморфизмы}
+
+\begin{define*}
+  Пусть $G$ --- группа, $\varnothing \neq H \subset G$. $H$ --- \emph{подгруппа} $G$, если $\forall a, b \in H \to ab \in H, a^{-1} \in H$. 
+  Обозначается как $H \leqslant G$.
+\end{define*}
+
+\begin{define*}
+  $\left\{ e \right\} \leqslant G$, $G \leqslant G$ --- несобственные подгруппы.
+\end{define*}
+
+\begin{example}
+  $D_n(F^*) \leqslant GL_n(F)$, где $D_n(F)$ --- множество диагональных матриц над $F$.
+\end{example}
+
+\begin{example}
+  $GL_n(F) \geqslant SL_N(F) = \left\{ A \in GL_n(F) | \det{A} = 1 \right\}$.
+\end{example}
+
+\begin{exercise}
+  $GL_n(F) \geqslant T_n(F)$ ($T$ --- верхнетреугольные. Здесь с не нулями на диагонали.).
+\end{exercise}
+
+\begin{example}
+  $GL_n(R)	\geqslant O_n$ --- группа ортогональных матриц ($A^{-1} = A^T$).
+\end{example}
+
+\begin{example}
+  $O_n \geqslant \mathcal{D}_n = \left\{ f \in O_n: f(P_n) = P_n \right\}$ ($P_n$ --- это многоугольник) --- группа диэдра.
+\end{example}
+
+\begin{exercise}
+  $|\mathcal{D}_n| = 2n$ (по $n$ поворотов и симметрий).
+\end{exercise}
+
+\begin{define*}
+  Пусть $G$ и $H$ --- две группы. $\varphi: G\to H$ --- \emph{изоморфизм}, если $\varphi$ --- биекция, и $\forall a, b \to$
+  \begin{enumerate}
+	\item $\varphi(ab) = \varphi(a)\varphi(b)$
+	\item $\varphi(a^{-1}) = (\varphi(a))^{-1}$.
+  \end{enumerate}
+\end{define*}
+
+\begin{define*}
+  Две группы \emph{изоморфны}, если $\exists \varphi$ --- изоморфизм.
+\end{define*}
+
+\begin{example}
+  $\mathcal{D}_3 \cong S_3$
+\end{example}
+
+\begin{example}
+  $\mathbb{C}^* \geqslant \mathbb{C}_n = \left\{ z \in \mathbb{C}: z^n = 1 \right\}$. 
+  $\mathbb{Z}_n \cong \mathbb{C}_n \cong$ группе вращений правильного $n$-угольника.
+\end{example}
+
+\begin{exercise}
+  Свойство 2 определения изоморфизма не нужно.
+\end{exercise}
+
+\begin{define*}
+  $G$ --- группа, $M \subset G$ --- подмножество. \emph{Подгруппой}, порождённой множеством $M$ называется пересечение всех подгрупп в $G$ содержащих $M$:
+  $$(M) = \bigcap_{H\leqslant G, M\leqslant H}H$$
+\end{define*}
+
+\begin{claim}
+  Пересечение любого семейства подгрупп --- подгруппа. (в т.\,ч., $(M)$ --- подгруппа)
+\end{claim}
+
+\begin{proof}
+  Пусть $K = \bigcap_{H_i \leqslant G, i \in I}H_i$. Если $a, b \in K$, то 
+  $a, b \in H_i \Rightarrow 
+  \left\{ 
+	\begin{aligned}
+	  ab \in H_i &\Rightarrow& ab \in K\\ 
+	  a^{-1} \in H_i &\Rightarrow& a^{-1} \in K
+	\end{aligned}
+  \right.$, кроме того, $e \in k$.
+\end{proof}
+
+\begin{claim}
+  $(M) = \left\{ a_1, \ldots, a_k: \forall i \leqslant k \to a_i \in M \lor a^{-1} \in M \right\}$.
+\end{claim}
+
+\begin{proof}
+  Обозначим правую часть за $N$.
+
+  \begin{itemize}
+	\item $N \subset (M)$: если $a_i, \ldots, a_k \in N$, то $a_i \in (M) \Rightarrow a_1, \ldots, a_k \in (M)$.
+	\item $(M) \subset N$: это так, ибо $N$ --- подгруппа, содержащая $M$.
+  \end{itemize}
+\end{proof}
+
+\end{document}
+

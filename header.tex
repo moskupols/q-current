@@ -1,15 +1,17 @@
-\documentclass[oneside,russian]{amsart}
-\usepackage[T1]{fontenc}
+\documentclass[oneside,russian, draft]{amsart}
+\usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
+\usepackage[margin=1in]{geometry}
 \pagestyle{fancy}
-\setlength{\parskip}{\medskipamount}
-\setlength{\parindent}{0pt}
+%\setlength{\parskip}{\medskipamount}
+%\setlength{\parindent}{0pt}
 \usepackage[russian]{babel}
 \usepackage{amsthm}
 \usepackage{amstext}
 \usepackage{amssymb}
 \usepackage{mathdots}
+\usepackage{cmap}
 \usepackage[unicode=true,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
@@ -17,10 +19,10 @@
 
 \makeatletter
 
-%\DeclareRobustCommand{\cyrtext}{%
-%  \fontencoding{T2A}\selectfont\def\encodingdefault{T2A}}
-%\DeclareRobustCommand{\textcyr}[1]{\leavevmode{\cyrtext #1}}
-%\AtBeginDocument{\DeclareFontEncoding{T2A}{}{}}
+\DeclareRobustCommand{\cyrtext}{
+  \fontencoding{T2A}\selectfont\def\encodingdefault{T2A}}
+\DeclareRobustCommand{\textcyr}[1]{\leavevmode{\cyrtext #1}}
+\AtBeginDocument{\DeclareFontEncoding{T2A}{}{}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
 %\numberwithin{equation}{section}
