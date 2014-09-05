@@ -12,7 +12,7 @@ all: $(TEMP_TARGETS)
 	cp -f $(TEMP_TARGETS) -t $(PDFS_DIR)
 
 commit: all
-	git add header.tex template.tex .gitignore $(SOURCES) $(TARGETS)
+	git add header.tex template.tex .gitignore $(SOURCES)
 	git commit
 
 %.pdf: %.aux %.tex
