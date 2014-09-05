@@ -88,31 +88,31 @@
 
 \begin{define*}
   Пусть $G$ --- группа, $\varnothing \neq H \subset G$. $H$ --- \emph{подгруппа} $G$, если $\forall a, b \in H \to ab \in H, a^{-1} \in H$. 
-  Обозначается как $H \leqslant G$.
+  Обозначается как $H \le G$.
 \end{define*}
 
 \begin{define*}
-  $\left\{ e \right\} \leqslant G$, $G \leqslant G$ --- несобственные подгруппы.
+  $\left\{ e \right\} \le G$, $G \le G$ --- несобственные подгруппы.
 \end{define*}
 
 \begin{example}
-  $D_n(F^*) \leqslant GL_n(F)$, где $D_n(F)$ --- множество диагональных матриц над $F$.
+  $D_n(F^*) \le GL_n(F)$, где $D_n(F)$ --- множество диагональных матриц над $F$.
 \end{example}
 
 \begin{example}
-  $GL_n(F) \geqslant SL_N(F) = \left\{ A \in GL_n(F) | \det{A} = 1 \right\}$.
+  $GL_n(F) \ge SL_N(F) = \left\{ A \in GL_n(F) | \det{A} = 1 \right\}$.
 \end{example}
 
 \begin{exercise}
-  $GL_n(F) \geqslant T_n(F)$ ($T$ --- верхнетреугольные. Здесь с не нулями на диагонали.).
+  $GL_n(F) \ge T_n(F)$ ($T$ --- верхнетреугольные. Здесь с не нулями на диагонали.).
 \end{exercise}
 
 \begin{example}
-  $GL_n(R)	\geqslant O_n$ --- группа ортогональных матриц ($A^{-1} = A^T$).
+  $GL_n(R)	\ge O_n$ --- группа ортогональных матриц ($A^{-1} = A^T$).
 \end{example}
 
 \begin{example}
-  $O_n \geqslant \mathcal{D}_n = \left\{ f \in O_n: f(P_n) = P_n \right\}$ ($P_n$ --- это многоугольник) --- группа диэдра.
+  $O_n \ge \mathcal{D}_n = \left\{ f \in O_n: f(P_n) = P_n \right\}$ ($P_n$ --- это многоугольник) --- группа диэдра.
 \end{example}
 
 \begin{exercise}
@@ -136,7 +136,7 @@
 \end{example}
 
 \begin{example}
-  $\mathbb{C}^* \geqslant \mathbb{C}_n = \left\{ z \in \mathbb{C}: z^n = 1 \right\}$. 
+  $\mathbb{C}^* \ge \mathbb{C}_n = \left\{ z \in \mathbb{C}: z^n = 1 \right\}$. 
   $\mathbb{Z}_n \cong \mathbb{C}_n \cong$ группе вращений правильного $n$-угольника.
 \end{example}
 
@@ -146,7 +146,7 @@
 
 \begin{define*}
   $G$ --- группа, $M \subset G$ --- подмножество. \emph{Подгруппой}, порождённой множеством $M$ называется пересечение всех подгрупп в $G$ содержащих $M$:
-  $$(M) = \bigcap_{H\leqslant G, M\leqslant H}H$$
+  $$(M) = \bigcap_{H\le G, M\le H}H$$
 \end{define*}
 
 \begin{claim}
@@ -154,7 +154,7 @@
 \end{claim}
 
 \begin{proof}
-  Пусть $K = \bigcap_{H_i \leqslant G, i \in I}H_i$. Если $a, b \in K$, то 
+  Пусть $K = \bigcap_{H_i \le G, i \in I}H_i$. Если $a, b \in K$, то 
   $a, b \in H_i \Rightarrow 
   \left\{ 
 	\begin{aligned}
@@ -165,7 +165,7 @@
 \end{proof}
 
 \begin{claim}
-  $(M) = \left\{ a_1, \ldots, a_k: \forall i \leqslant k \to a_i \in M \lor a^{-1} \in M \right\}$.
+  $(M) = \left\{ a_1, \ldots, a_k: \forall i \le k \to a_i \in M \lor a^{-1} \in M \right\}$.
 \end{claim}
 
 \begin{proof}
