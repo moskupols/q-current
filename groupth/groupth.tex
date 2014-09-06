@@ -2,7 +2,7 @@
 
 \begin{document}
 
-\title{Group theory}
+\title{$\mbox{Теория групп}$}
 \author{Фёдор Алексеев}
 \raigorname{И.\,И.\,Богданов}
 
@@ -51,7 +51,7 @@
 \end{example}
 
 \begin{example}
-  $(\mathbb{R}\backslash\{0\}, 0)$, и даже $F^* = (F\backslash\{0\}, \cdot)$.
+  $(\mathbb{R}\setminus\{0\}, 0)$, и даже $F^* = (F\setminus\{0\}, \cdot)$.
 \end{example}
 
 \begin{remark*}
@@ -85,7 +85,7 @@
   Если $\Omega$ --- произвольное множество, то аналогичное множество будем обозначать $S(\Omega)$. Это тоже группа.
 \end{example}
 
-\section{Подгруппы. Изоморфизмы}
+\section{Подгруппы}
 
 \begin{define*}
   Пусть $G$ --- группа, $\varnothing \neq H \subset G$. $H$ --- \emph{подгруппа} $G$, если $\forall a, b \in H \to ab \in H, a^{-1} \in H$. 
@@ -119,6 +119,8 @@
 \begin{exercise}
   $|\mathcal{D}_n| = 2n$ (по $n$ поворотов и симметрий).
 \end{exercise}
+
+\section{Изоморфизм}
 
 \begin{define*}
   Пусть $G$ и $H$ --- две группы. $\varphi: G\to H$ --- \emph{изоморфизм}, если $\varphi$ --- биекция, и $\forall a, b \to$
@@ -155,7 +157,7 @@
 \end{claim}
 
 \begin{proof}
-  Пусть $K = \bigcap_{H_i \le G, i \in I}H_i$. Если $a, b \in K$, то 
+  Пусть $K = \underset{H_i \le G, i \in I}{\bigcap}H_i$. Если $a, b \in K$, то 
   $a, b \in H_i \Rightarrow 
   \left\{ 
 	\begin{aligned}
@@ -175,8 +177,16 @@
   \begin{itemize}
 	\item $N \subset (M)$: если $a_i, \ldots, a_k \in N$, то $a_i \in (M) \Rightarrow a_1, \ldots, a_k \in (M)$.
 	\item $(M) \subset N$: это так, ибо $N$ --- подгруппа, содержащая $M$.
+		Если $m\in M\Rightarrow m\in N$. Если $a_{1},\ldots,a_{k},b_{1},\ldots,b_{l}\in N$,
+		то $\left(a_{1}\cdot\ldots\cdot a_{k}\right)\left(b_{1}\cdot\ldots\cdot b_{l}\right)\in N$,
+		то есть $N$ --- замкнута. $e\in N$ --- нейтральный, ассоциативность
+		очевидна, $\left(a_{1}\cdot\ldots\cdot a_{k}\right)^{-1}=a_{k}^{-1}\cdot\ldots\cdot a_{1}^{-1}$.
   \end{itemize}
 \end{proof}
+
+\begin{example}
+  $r\in D_{n}$ --- поворот на $\frac{2\pi}{n}$. Тогда $\left(r\right)\cong\mathbb{Z}_{n}$.
+\end{example}
 
 \end{document}
 
