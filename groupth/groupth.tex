@@ -10,8 +10,8 @@
 \gitlink{}
 \tableofcontents\newpage{}
 
-\part{Лекция 1. Группа, подгруппа. Изоморфизм групп.}
-\section{Группа}
+\part*{Лекция 1. Группа, подгруппа. Изоморфизм групп.}
+\section*{Группа}
 \begin{define*}
   \emph{Группа}~--- это множество $G$ с определённой на нём бинарной операцией (т.\,е. $\forall a, b \in G$ определён результат операции $a\cdot b \in G$)
   \begin{description}
@@ -73,10 +73,10 @@
 \begin{proof}
   Если $(a, n) \neq 1$, то $ka \not\equiv 1 \pmod{n}$. Если $(a, n) = 1$, то $\exists u, v: au + nv = a	\Rightarrow	au \equiv 1 \pmod{n}$
 \end{proof}
-Значит $|\mathbb{Z}_n^*| = \varphi(n)$.
+Значит $\abs{\mathbb{Z}_n^*} = \varphi(n)$.
 
 \begin{define*}
-  \emph{Порядок группы} G --- это количество её элементов $|G|$.
+  \emph{Порядок группы} G --- это количество её элементов $\abs{G}$.
 \end{define*}
 
 \begin{example}
@@ -85,7 +85,7 @@
   Если $\Omega$ --- произвольное множество, то аналогичное множество будем обозначать $S(\Omega)$. Это тоже группа.
 \end{example}
 
-\section{Подгруппы}
+\section*{Подгруппы}
 
 \begin{define*}
   Пусть $G$ --- группа, $\varnothing \neq H \subset G$. $H$ --- \emph{подгруппа} $G$, если $\forall a, b \in H \to ab \in H, a^{-1} \in H$. 
@@ -101,7 +101,7 @@
 \end{example}
 
 \begin{example}
-  $GL_n(F) \ge SL_N(F) = \left\{ A \in GL_n(F) | \det{A} = 1 \right\}$.
+  $GL_n(F) \ge SL_N(F) = \Set{ A \in GL_n(F) | \det{A} = 1 }$.
 \end{example}
 
 \begin{exercise}
@@ -113,14 +113,14 @@
 \end{example}
 
 \begin{example}
-  $O_n \ge \mathcal{D}_n = \left\{ f \in O_n: f(P_n) = P_n \right\}$ ($P_n$ --- это многоугольник) --- группа диэдра.
+  $O_n \ge \mathcal{D}_n = \Set{ f \in O_n: f(P_n) = P_n }$ ($P_n$ --- это многоугольник) --- группа диэдра.
 \end{example}
 
 \begin{exercise}
-  $|\mathcal{D}_n| = 2n$ (по $n$ поворотов и симметрий).
+  $\abs{\mathcal{D}_n} = 2n$ (по $n$ поворотов и симметрий).
 \end{exercise}
 
-\section{Изоморфизм}
+\section*{Изоморфизм}
 
 \begin{define*}
   Пусть $G$ и $H$ --- две группы. $\varphi: G\to H$ --- \emph{изоморфизм}, если $\varphi$ --- биекция, и $\forall a, b \to$
@@ -139,7 +139,7 @@
 \end{example}
 
 \begin{example}
-  $\mathbb{C}^* \ge \mathbb{C}_n = \left\{ z \in \mathbb{C}: z^n = 1 \right\}$. 
+  $\mathbb{C}^* \ge \mathbb{C}_n = \Set{ z \in \mathbb{C}: z^n = 1 }$. 
   $\mathbb{Z}_n \cong \mathbb{C}_n \cong$ группе вращений правильного $n$-угольника.
 \end{example}
 
@@ -168,7 +168,7 @@
 \end{proof}
 
 \begin{claim}
-  $(M) = \left\{ a_1, \ldots, a_k: \forall i \le k \to a_i \in M \lor a^{-1} \in M \right\}$.
+  $(M) = \Set{ a_1, \ldots, a_k: \forall i \le k \to a_i \in M \lor a^{-1} \in M }$.
 \end{claim}
 
 \begin{proof}

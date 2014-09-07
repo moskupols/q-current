@@ -25,16 +25,16 @@
 \section{НКА}
 \begin{define*}
 \emph{Алфавит} --- непустое конечное множество символов $\Sigma$.
-Множество \emph{слов} всех слов над данным алфавитом --- $\Sigma^{\star}$.
+Множество всех слов над данным алфавитом --- $\Sigma^{\star}$.
 $\varepsilon\in\Sigma^{\star}$ --- \emph{пустое слово}. $L\subset\Sigma^{\star}$
 --- \emph{формальный язык}.
 
-Операция \emph{конкатенации} языков: $L_{1}\cdot L_{2}=\left\{ uv|u\in L_{1},v\in L_{2}\right\} $
+Операция \emph{конкатенации} языков: $L_{1}\cdot L_{2}=\Set{ uv|u\in L_{1},v\in L_{2}} $
 (точку будем опускать).
 \end{define*}
 
 \begin{define*}
-\emph{Конечный недетерменированный автомат }$M=\left\langle Q,\Sigma,\Delta,q_{0},F\right\rangle $,
+\emph{Конечный недетерминированный автомат }$M=\Braket{ Q,\Sigma,\Delta,q_{0},F} $,
 где $Q$ --- множество \emph{состояний},$\Sigma$ --- \emph{алфавит},
 $\Delta\subset Q\times\Sigma^{\star}\times Q$ --- конечное множество
 \emph{переходов}, $q_{0}\in Q$ --- \emph{стартовое состояние}, $F\subset Q$
@@ -45,46 +45,45 @@ $\Delta\subset Q\times\Sigma^{\star}\times Q$ --- конечное множес�
 Определим $\vdash$ --- наименьшее рефлексивное транзитивное отношение,
 такое что
 
-1) $\forall\left(\left\langle q_{1},w\right\rangle \mapsto q_{2}\right)\in\Delta\rightarrow\left\langle q_{1},w\right\rangle \vdash\left\langle q_{2},\varepsilon\right\rangle $
+1) $\forall\left(\Braket{ q_{1},w} \mapsto q_{2}\right)\in\Delta\rightarrow\Braket{ q_{1},w} \vdash\Braket{ q_{2},\varepsilon} $
 
-2) $\left\langle q_{1},u\right\rangle \vdash\left\langle q_{2},\varepsilon\right\rangle $,
-$\left\langle q_{2},w\right\rangle \vdash\left\langle q_{3},\varepsilon\right\rangle \Rightarrow\left\langle q_{1},uw\right\rangle \vdash\left\langle q_{3},\varepsilon\right\rangle $
+2) $\Braket{ q_{1},u} \vdash\Braket{ q_{2},\varepsilon} $,
+$\Braket{ q_{2},w} \vdash\Braket{ q_{3},\varepsilon} \Rightarrow\Braket{ q_{1},uw} \vdash\Braket{ q_{3},\varepsilon} $
 
-3) $\left\langle q_{1},u\right\rangle \vdash\left\langle q_{2},\varepsilon\right\rangle \Rightarrow\left\langle q_{1},uv\right\rangle \vdash\left\langle q_{2},v\right\rangle $
+3) $\Braket{ q_{1},u} \vdash\Braket{ q_{2},\varepsilon} \Rightarrow\Braket{ q_{1},uv} \vdash\Braket{ q_{2},v} $
 \end{define*}
 
 \begin{define*}
-Язык задаваемый автоматом $M$ --- $L(M)=\left\{ w\in\Sigma|\exists q\in F:\ \left\langle q_{0},w\right\rangle \vdash\left\langle q,\varepsilon\right\rangle \right\} $.
+Язык задаваемый автоматом $M$ --- $L(M)=\Set{ w\in\Sigma|\exists q\in F:\ \Braket{ q_{0},w} \vdash\Braket{ q,\varepsilon} } $.
 Такие языки называются \emph{автоматными}.\end{define*}
 \begin{lem}
 $\forall L$ --- автоматного языка $\exists M^{\prime}$ --- конечный
-автомат, такой что $L(M^{\prime})=L$ и $\forall\left(\left\langle q_{1},w\right\rangle \mapsto q_{2}\right)\in\Delta^{\prime}\rightarrow\left|w\right|\le1$.\end{lem}
+автомат, такой что $L(M^{\prime})=L$ и $\forall\left(\Braket{ q_{1},w} \mapsto q_{2}\right)\in\Delta^{\prime}\rightarrow\abs{w}\le1$.\end{lem}
 \begin{proof}
-Построим автомат явно, добавив на каждом переходе $\left|w\right|-1$
+Построим автомат явно, добавив на каждом переходе $\abs{w}-1$
 новых состояний и сделав между ними однобуквенные переходы.\end{proof}
 \begin{lem}
 $\forall L$ --- автоматного языка $\exists M^{\prime}$ --- конечный
-автомат, такой что все переходы имеют длину $\le1$ и $\left|F\right|=1$\end{lem}
+автомат, такой что все переходы имеют длину $\le1$ и $\abs{F}=1$\end{lem}
 \begin{proof}
-Строим автомат $M^{\prime}=\left\langle Q\cup\left\{ q_{f}\right\} ,\Sigma,\Delta^{\prime},q_{0},\left\{ q_{f}\right\} \right\rangle $,
-где $\Delta^{\prime}=\Delta\cup\left\{ \left\langle q,\varepsilon\right\rangle \mapsto q_{f}|q\in F\right\} $.\end{proof}
+Строим автомат $M^{\prime}=\Braket{ Q\cup\left\{ q_{f}\right\} ,\Sigma,\Delta^{\prime},q_{0},\left\{ q_{f}\right\} } $,
+где $\Delta^{\prime}=\Delta\cup\Set{ \Braket{ q,\varepsilon} \mapsto q_{f}|q\in F} $.\end{proof}
 \begin{lem}
 $\forall L$ --- автоматного языка $\exists M^{\prime}$ --- НКА с
 однобуквенными переходами, его распознающий\end{lem}
 \begin{proof}
-Построим автомат $M^{\prime}=\left\langle Q,\Sigma,\Delta^{\prime},q_{0},F^{\prime}\right\rangle $.
+Построим автомат $M^{\prime}=\Braket{ Q,\Sigma,\Delta^{\prime},q_{0},F^{\prime}} $.
 
-$\Delta^{\prime}=\Delta\cup\left\{ \left(q_{1},a\right)\mapsto q_{2}|\exists q_{3}:\ \left(q_{1},\varepsilon\right)\vdash q_{3},\ \left(q_{3},a\right)\vdash q_{2}\right\} $.
-$F^{\prime}=\left\{ q|\exists q^{\prime}\in F^{\prime}:\ \left(\left\langle q,\varepsilon\right\rangle \vdash\left\langle q^{\prime},\varepsilon\right\rangle \right)\right\} \cup F$.
+$\Delta^{\prime}=\Delta\cup\Set{ \left(q_{1},a\right)\mapsto q_{2}|\exists q_{3}:\ \left(q_{1},\varepsilon\right)\vdash q_{3},\ \left(q_{3},a\right)\vdash q_{2}} $.
+$F^{\prime}=\Set{ q|\exists q^{\prime}\in F^{\prime}:\ \left(\Braket{ q,\varepsilon} \vdash\Braket{ q^{\prime},\varepsilon} \right)} \cup F$.
 
-Пусть $w\in L(M)\Leftrightarrow\exists q\in F\ \exists q_{1},\ldots,q_{n}\in Q:\ \left\langle q_{0},a_{1},\ldots,a_{n}\right\rangle \vdash\left\langle q_{1},a_{1},\ldots,a_{n}\right\rangle \vdash\ldots\vdash\left\langle q_{n},\varepsilon\right\rangle \vdash\left\langle q,\varepsilon\right\rangle $.
+Пусть $w\in L(M)\Leftrightarrow\exists q\in F\ \exists q_{1},\ldots,q_{n}\in Q:\ \Braket{ q_{0},a_{1},\ldots,a_{n}} \vdash\Braket{ q_{1},a_{1},\ldots,a_{n}} \vdash\ldots\vdash\Braket{ q_{n},\varepsilon} \vdash\Braket{ q,\varepsilon} $.
 Тогда в новом автомате это слово будет принято, так как по построению
 из состояния $q_{i}$ есть переход по символу $a_{i+1}$ в $q_{i+1}$,
 а $q_{n}\in F^{\prime}$.\end{proof}
-\begin{algorithm*}
-Распознавания слова автоматом\end{algorithm*}
+\begin{algorithm*}[Распознавания слова автоматом]\end{algorithm*}
 \begin{lyxcode}
-  curQ~=~$\left\{ q_{0}\right\} $
+  curQ~=~$\Set{ q_{0}} $
 
   for~c~in~word:
 	\begin{lyxcode}
@@ -94,25 +93,25 @@ $F^{\prime}=\left\{ q|\exists q^{\prime}\in F^{\prime}:\ \left(\left\langle q,\v
 	  \begin{lyxcode}
 	  for~$\left(state,c,newState\right)$~in~$\Delta$:
 		\begin{lyxcode}
-		newQ~=~newQ$\cup\left\{ newState\right\} $
+		  newQ~=~$\mathtt{newQ}\cup\Set{newState} $
 		\end{lyxcode}
 	  \end{lyxcode}
 	curQ~=~newQ
 	\end{lyxcode}
-  if~curQ$\cap F=\varnothing$~then~accept~word
+  if~$\mathtt{curQ} \cap F=\varnothing$~then~accept~word
 
   else~discard~word
 \end{lyxcode}
 
 \section{ДКА}
 \begin{define*}
-$M=\left\langle Q,\Sigma,\Delta,q_{0},F\right\rangle $ --- ДКА, если
+$M=\Braket{ Q,\Sigma,\Delta,q_{0},F} $ --- ДКА, если
 
-1) $\forall\left(\left\langle q_{1},a\right\rangle \mapsto q_{2}\right)\in\Delta\Rightarrow\left|a\right|=1$
+1) $\forall\left(\Braket{ q_{1},a} \mapsto q_{2}\right)\in\Delta\Rightarrow\abs{a}=1$
 
-2) $\forall q\in Q,\ a\in\Sigma\rightarrow\left|\left\{ q_{2}|\left\langle q_{1},a\right\rangle \mapsto q_{2}\right\} \right|\le1$\end{define*}
+2) $\forall q\in Q,\ a\in\Sigma\rightarrow\abs{\Set{ q_{2}|\Braket{ q_{1},a} \mapsto q_{2}} }\le1$\end{define*}
 \begin{claim*}
-$\forall q_{1}\in Q\ \forall w\in\Sigma^{\star}\rightarrow\left|\left\{ q_{2}|\left\langle q_{1},w\right\rangle \vdash\left\langle q_{2},\varepsilon\right\rangle \right\} \right|\le1$.\end{claim*}
+$\forall q_{1}\in Q\ \forall w\in\Sigma^{\star}\rightarrow\abs{\set{ q_{2}|\Braket{ q_{1},w} \vdash\Braket{ q_{2},\varepsilon} } }\le1$.\end{claim*}
 
 \end{document}
 

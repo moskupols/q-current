@@ -15,6 +15,7 @@
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
  {hyperref}
+\usepackage{braket} % for \braket, \set and \Set
 
 \makeatletter
 
@@ -67,4 +68,7 @@
 \providecommand\raigortold{читал}
 \providecommand{\gitlink}{Конспект лекций, которые \raigor{} \raigortold{} на ФИВТ МФТИ осенью 2014 года.
 Исходники лежат, благодарности полнятся, а багрепорты принимаются по адресу \url{https://github.com/moskupols/q-current}.}
+
+%\newcommand{\relmid}{\mathrel{}|\mathrel{}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 
