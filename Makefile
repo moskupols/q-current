@@ -1,6 +1,6 @@
 SHELL=bash
 
-SUBJECTS=groupth danalysis diff_equations formal_langs
+SUBJECTS=groupth danalysis diff_equations formal_langs probabilities
 PDFS_DIR=pdfs
 
 SOURCES=$(foreach subj,$(SUBJECTS),$(subj)/$(subj).tex)

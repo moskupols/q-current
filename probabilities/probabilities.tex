@@ -10,6 +10,10 @@
 \gitlink\tableofcontents
 %\newpage{}
 
+\part*{Лекция 1. Вероятность. Вероятностное пространство. Алгебра}
+
+\section*{Базовые определения}
+
 \begin{define*}
   $\Omega = \set{w1, \ldots, w2}$ --- \emph{множество элементарных событий} (\emph{элементарных исходов}).
 \end{define*}
@@ -97,6 +101,8 @@
   \end{enumerate}
 \end{define*}
 
+\section*{Свойства алгебры и вероятностной меры}
+
 \begin{remark*}[Свойства алгебры] $ $
   \begin{enumerate}
 	\item $\varnothing \in \mathcal{A}$, так как $\varnothing = \overline{\Omega}$;
@@ -120,35 +126,49 @@
 	\item $P$ --- вероятность на $(\Omega, \mathcal{A})$
 	\item $P$ --- конечно-аддитивная вероятность на $(\Omega, \mathcal{A})$, непрерывная сверху: 
 	  \[
-		\forall A_1, A_2, \ldots \in \mathcal{A}:  A_i \subseteq A_i+1 \wedge \bigcup A_i \in \mathcal{A} \to \lim\limits_{n\to\infty} P(A_n) = P(\bigcup A_i)
+		\forall A_1, A_2, \ldots \in \mathcal{A}:  A_i \subseteq A_i+1 \mbox{ и } \bigcup A_i \in \mathcal{A} \to \lim\limits_{n\to\infty} P(A_n) = P(\bigcup A_i)
 	  \]
 	\item $P$ --- конечно-аддитивная вероятность на $(\Omega, \mathcal{A})$, непрерывная снизу:
 	  \[
-	   \forall A_1, A_2, \ldots \in \mathcal{A}:  A_i \supseteq A_i+1 \wedge \bigcap A_i \in \mathcal{A} \to \lim\limits_{n\to\infty} P(A_n) = 0
+		\forall A_1, A_2, \ldots \in \mathcal{A}:  A_i \supseteq A_{i+1} \mbox{ и } \bigcap A_i \in \mathcal{A} \to \lim\limits_{n\to\infty} P(A_n) = 0
 	  \]
 	\item $P$ --- конечно-аддитивная вероятность на $(\Omega, \mathcal{A})$, непрерывная в нуле:
 	  \[
-		\forall A_1, \ldots \in \mathcal{A}: A_1 \supseteq A_2 \supseteq \ldots \wedge A_i \neq \varnothing \to \lim P(A_i) = 0
+		\forall A_1, \ldots \in \mathcal{A}: A_1 \supseteq A_2 \supseteq \ldots \mbox{ и } A_i \neq \varnothing \to \lim P(A_i) = 0
 	  \]
   \end{enumerate}
 
   \begin{proof} $ $
 	\begin{description}
-	  \item [1 $\Rightarrow$ 2] Пусть $A_1, A_2, \ldots \in \mathcal{A}: A_1 \subset A_2 \subset \ldots$ и $\bigcup A_i \in \mathcal{A} $. 
-		Тогда Рассмотрим $B_1 = A_1, B_2 = A_2\setminus A_1, B_3 = A_3 \setminus A_2, \ldots$. Тогда $\bigcup A_i = \bigcup B_i$,
-		при этом $B_i \cap B_j = \varnothing \forall i \neq j$. Тогда $P(\bigcup A_i) = P(\bigcup B_i) = 
-		\sum P(B_i) = \sum (P(A_i) - P(A_{i-1})) = \lim \sum (P(A_i) - P(A_{i-1})) = \lim P(A_i)$
-	  \item [2 $\Rightarrow$ 3] Пусть $A_i, A_2, \ldots \in \mathcal{A}: A_1 \supseteq A_2 > \ldots \wedge A = \bigcap A_i \in \mathcal{A}$.
+	  \item [1 $\Rightarrow$ 2] Пусть $A_1, A_2, \ldots \in \mathcal{A}: A_1 \subseteq A_2 \subseteq \ldots$ и $\bigcup A_i \in \mathcal{A} $. 
+		
+		Рассмотрим $B_1 = A_1, B_2 = A_2\setminus A_1, B_3 = A_3 \setminus A_2, \ldots$. 
+		
+		Тогда $\bigcup A_i = \bigcup B_i$, при этом $\forall i \neq j \to B_i \cap B_j = \varnothing$. Тогда $P(\bigcup A_i) = P(\bigcup B_i) = 
+		\sum P(B_i) = \sum (P(A_i) - P(A_{i-1})) = \lim\limits_{n\to\infty} \sum\limits_{i=2}^{n} (P(A_i) - P(A_{i-1})) = \lim\limits_{n\to\infty} P(A_n)$
 
-		Тогда $P(A) = 1 - P(\overline{A}) = 1 - P(\bigcup \overline{A_i}) = 1 - \lim P(\overline{A_n}) = 1 - \lim (1 - P(A_n)) = 1 - 1 + \lim P(A_n)$.
+	  \item [2 $\Rightarrow$ 3] Пусть $A_i, A_2, \ldots \in \mathcal{A}: A_1 \supseteq A_2 \supseteq \ldots \mbox{ и } A = \bigcap A_i \in \mathcal{A}$.
+
+		Тогда $P(A) = 1 - P(\overline{A}) = 1 - P(\bigcup \overline{A_i}) = 1 - \lim\limits_{n\to\infty} P(\overline{A_n}) = 
+		1 - \lim\limits_{n\to\infty}(1 - P(A_n)) = 1 - 1 + \lim\limits_{n\to\infty} P(A_n)$.
+
 	  \item [3 $\Rightarrow$ 4] Очевидно.
-	  \item [4 $\Rightarrow$ 1] Пусть $A_1, A_2, \ldots \in \mathcal{A}: A_i \cap A_j = \varnothing \wedge \bigcup A_i \in \mathcal{A}$.
+
+	  \item [4 $\Rightarrow$ 1] Пусть $A_1, A_2, \ldots \in \mathcal{A}: A_i \cap A_j = \varnothing \mbox{ и } \bigcup A_i \in \mathcal{A}$.
+		
 		Рассмотрим множество $B_n = A \setminus (A_1 \cup \ldots \cup A_n)$. Ясно, что $B_1 \supseteq B_2 \supseteq \ldots$. 
 		
-		Кроме того, $\bigcap B_i = \varnothing$. Почему? пусть $w \in \bigcap B_i \Rightarrow \exists n : w \in A_n$, но $w \not\in B_n$
+		Кроме того, $\bigcap B_i = \varnothing$: пусть $w \in \bigcap B_i$, тогда $\exists n : w \in A_n$, однако $w \not\in B_n$!
 		
-		Тогда по свойству 4 $\lim P(B_n) = 0 = \lim P(A\setminus (A_1 \cup \ldots \cup A_n)) = \lim (P(A) - P(A_1 \cup \ldots \cup A_n)) =
-		P(A) - \lim P(A_1 \cup \ldots \cup A_n) = P(A) - \lim \sum P(A_i) = P(A) - \sum P(A_i) \Rightarrow P$ --- вероятность.
+		Тогда по свойству 4 
+		\begin{multline*}
+		  \lim\limits_{n\to\infty} P(B_n) = 0 = \lim\limits_{n\to\infty} P(A\setminus (A_1 \cup \ldots \cup A_n)) = \\
+		  \lim\limits_{n\to\infty} (P(A) - P(A_1 \cup \ldots \cup A_n)) = 
+		  P(A) - \lim\limits_{n\to\infty} P(A_1 \cup \ldots \cup A_n) = \\
+		  P(A) - \lim\limits_{n\to\infty} \sum\limits_{i=1}^{n} P(A_i) = P(A) - \sum\limits_{i=1}^{n} P(A_i) \Rightarrow \mbox{$P$ --- вероятность.}
+		  \qedhere{}
+		\end{multline*}
+		
 	\end{description}
   \end{proof}
 \end{Th}
