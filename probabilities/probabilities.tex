@@ -1,0 +1,176 @@
+\input{../header.tex}
+
+\begin{document}
+
+\title{$\mbox{Теория вероятности}$}
+\author{Фёдор Алексеев}
+\raigorname{М.\,Е.\,Жуковский}
+
+\maketitle
+\gitlink\tableofcontents
+%\newpage{}
+
+\begin{define*}
+  $\Omega = \set{w1, \ldots, w2}$ --- \emph{множество элементарных событий} (\emph{элементарных исходов}).
+\end{define*}
+
+Вообще событий больше. Например, если монетку бросали два раза, то событие ``в первом случае выпал орёл'' происходит в двух из 
+четырёх возможных исходов. Таким образом,
+
+\begin{define*}
+  Если $\Omega$ --- множество элементарных исходов, то множество $A \subset \Omega$ --- \emph{событие}.
+\end{define*}
+
+\begin{define*}[Временное]
+  \emph{Вероятность} --- это функция $P: 2^{\Omega} \to [0, 1]$ такая, что:
+  \begin{enumerate}
+	\item $P(\Omega) = 1$
+	\item $\forall A, B \subset \Omega, A \cup B = \varnothing \to P(A\cap B) = P(A) + P(B)$
+  \end{enumerate}
+\end{define*}
+
+\begin{define*}[Временное]
+  До поры до времени будем называть тройку $(\Omega, 2^{\Omega}, P)$ \emph{вероятностным пространством}, затем определение, например,
+  вероятности несколько изменится.
+\end{define*}
+
+\begin{example}[Схема неупорядоченного выбора без повторений $k$ элементов из $n$] $ $ \\
+  Пусть $k = 3, n = 10$. Тогда $\Omega = \set{w_1, \ldots, w_{C_{10}^{3}}}$. 
+  Рассмотрим, например, событие $A = \set{w_1, \ldots, w_{C_{5}^{3}}}$, и положим $\forall i \le C_{10}^{3} \to P(w_i) = \frac{1}{C_{10}^{3}}$.
+
+  $\forall	b \in 2^{\Omega} \to P(B) = \sum_{w\in B} P(w) = \frac{\abs{b}}{\abs{\Omega}}$. Тогда $P(A) = \frac{C_{5}^{3}}{C_{10}^{3}}$
+\end{example}
+
+А теперь рассмотрим произвольное (не обязательно конечное или даже счётное) множество элементарных событий. 
+С ним всё не так-то просто, и для обращения с ним введём
+
+\begin{define*}
+  $\mathcal{A}$ --- система подмножеств $\Omega$ называеся \emph{алгеброй}, если выполняются следующие свойства:
+  \begin{enumerate}
+	\item $\Omega \in \mathcal{A}$
+	\item $A \in \mathcal{A} \Rightarrow \overline{A} \in \mathcal{A} $
+	\item $A, B \in \mathcal{A} \Rightarrow A \cap B \in \mathcal{A} $
+  \end{enumerate}
+\end{define*}
+
+\begin{define*}
+  Функция $P: \mathcal{A} \to \mathbb{R}$ --- \emph{конечно-аддитивная мера}, если верно следующее:
+  \begin{enumerate}
+	\item $\forall A \in \mathcal{A} \to P(A) \ge 0 $
+	\item $\forall A, B \in \mathcal{A}: A \cap B = \varnothing \to P(A \cup B) = P(A) + P(B)$
+  \end{enumerate}
+\end{define*}
+
+\begin{define*}
+  Конечно-аддитивная мера со свойством $P(\Omega) < \infty$ --- \emph{конечно-аддитивная конечная мера}.
+\end{define*}
+
+\begin{define*}
+  Если $P(\Omega) = 1$, то это \emph{конечно-аддитивная вероятностная мера} (\emph{конечно-аддитивная вероятность}).
+\end{define*}
+
+Однако свойства хочется усилить:
+\begin{define*} Функция $P: \mathcal{A} \to \mathbb{R}$ \emph{называется счётно-аддитивной мерой}, если
+  \begin{enumerate}
+	\item $\forall A \in \mathcal{A}	\to P(A) \ge 0$
+	\item $\forall A_1, A_2, \ldots \in \mathcal{A}: \forall i \neq j \to A_i \neq A_j, \bigcup_{i=1}^{\infty}A_i \in \mathcal{A}$, то 
+	  $P(\bigcup_{i=1}^\infty A_i) = \sum_{i=1}^{\infty} P(A_i)$.
+  \end{enumerate}
+\end{define*}
+
+\begin{define*}
+  Если $P$ --- счётно-аддитивная мера и $P(\Omega) < \infty$, то $P$ --- счётно-аддитивная конечная мера.
+  Если при этом $P(\Omega) = 1$, то $P$ --- \emph{вероятность}.
+\end{define*}
+
+\begin{define*}
+  Если множество элементарных исходов $\Omega$ конечно, то $(\Omega, \mathcal{A}, P)$ --- \emph{вероятностное пространство в конечном случае}.
+
+  Если $\Omega$ бесконечно, то $(\Omega, \mathcal{A}, P)$ ---  \emph{вероятностное пространство в общем случае}.
+\end{define*}
+
+\begin{define*}
+  \emph{$\sigma$-алгеброй} на множестве $\Omega$ называется система его подмножеств $\mathcal{F}$ такая что
+  \begin{enumerate}
+	\item $\mathcal{F} $ --- алгебра.
+	\item $\forall	A_1, A_2, \ldots \in \mathcal{F} \to \bigcap A_i \in \mathcal{F}$
+  \end{enumerate}
+\end{define*}
+
+\begin{remark*}[Свойства алгебры] $ $
+  \begin{enumerate}
+	\item $\varnothing \in \mathcal{A}$, так как $\varnothing = \overline{\Omega}$;
+	\item $\forall A \cap B \in \mathcal{A}  \to  A \cup B = \overline{ \overline{A} \cap \overline{B} } \in \mathcal{A}$;
+	\item $\forall A, B: A \setminus B \in \mathcal{A} \to A \setminus B = A \cap \overline{B} \in \mathcal{A} $;
+	\item $\forall A_1, A_2, \ldots \in \mathcal{F}  \to \bigcup A_i \in \mathcal{F}, \bigcup A_i = \overline{\bigcap\overline{A_i}} \in \mathcal{F}$.
+  \end{enumerate}
+\end{remark*}
+
+\begin{remark*}[Свойства вероятности] $ $
+  \begin{enumerate}
+	\item $P(\varnothing) = 0$, так как $P(\varnothing \cup \Omega) = P(\varnothing) + P(\Omega) = P(\varnothing) + 1$;
+	\item $A \subset B \Rightarrow P(B) \ge P(A)$, так как $B = A \cup (B\setminus A)$;
+	\item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$, так как $P(A\cup B) = P(A) + P(B\setminus A)$, $P(B) = P(A \cap B) + P(B \setminus A)$.
+  \end{enumerate}
+\end{remark*}
+
+\begin{Th}[О непрерывности вероятностной меры]
+  Пусть $\Omega$ --- произвольное множество, $\mathcal{A} $ --- алгебра на нём. Тогда следующие свойства эквивалентны:
+  \begin{enumerate}
+	\item $P$ --- вероятность на $(\Omega, \mathcal{A})$
+	\item $P$ --- конечно-аддитивная вероятность на $(\Omega, \mathcal{A})$, непрерывная сверху: 
+	  \[
+		\forall A_1, A_2, \ldots \in \mathcal{A}:  A_i \subseteq A_i+1 \wedge \bigcup A_i \in \mathcal{A} \to \lim\limits_{n\to\infty} P(A_n) = P(\bigcup A_i)
+	  \]
+	\item $P$ --- конечно-аддитивная вероятность на $(\Omega, \mathcal{A})$, непрерывная снизу:
+	  \[
+	   \forall A_1, A_2, \ldots \in \mathcal{A}:  A_i \supseteq A_i+1 \wedge \bigcap A_i \in \mathcal{A} \to \lim\limits_{n\to\infty} P(A_n) = 0
+	  \]
+	\item $P$ --- конечно-аддитивная вероятность на $(\Omega, \mathcal{A})$, непрерывная в нуле:
+	  \[
+		\forall A_1, \ldots \in \mathcal{A}: A_1 \supseteq A_2 \supseteq \ldots \wedge A_i \neq \varnothing \to \lim P(A_i) = 0
+	  \]
+  \end{enumerate}
+
+  \begin{proof} $ $
+	\begin{description}
+	  \item [1 $\Rightarrow$ 2] Пусть $A_1, A_2, \ldots \in \mathcal{A}: A_1 \subset A_2 \subset \ldots$ и $\bigcup A_i \in \mathcal{A} $. 
+		Тогда Рассмотрим $B_1 = A_1, B_2 = A_2\setminus A_1, B_3 = A_3 \setminus A_2, \ldots$. Тогда $\bigcup A_i = \bigcup B_i$,
+		при этом $B_i \cap B_j = \varnothing \forall i \neq j$. Тогда $P(\bigcup A_i) = P(\bigcup B_i) = 
+		\sum P(B_i) = \sum (P(A_i) - P(A_{i-1})) = \lim \sum (P(A_i) - P(A_{i-1})) = \lim P(A_i)$
+	  \item [2 $\Rightarrow$ 3] Пусть $A_i, A_2, \ldots \in \mathcal{A}: A_1 \supseteq A_2 > \ldots \wedge A = \bigcap A_i \in \mathcal{A}$.
+
+		Тогда $P(A) = 1 - P(\overline{A}) = 1 - P(\bigcup \overline{A_i}) = 1 - \lim P(\overline{A_n}) = 1 - \lim (1 - P(A_n)) = 1 - 1 + \lim P(A_n)$.
+	  \item [3 $\Rightarrow$ 4] Очевидно.
+	  \item [4 $\Rightarrow$ 1] Пусть $A_1, A_2, \ldots \in \mathcal{A}: A_i \cap A_j = \varnothing \wedge \bigcup A_i \in \mathcal{A}$.
+		Рассмотрим множество $B_n = A \setminus (A_1 \cup \ldots \cup A_n)$. Ясно, что $B_1 \supseteq B_2 \supseteq \ldots$. 
+		
+		Кроме того, $\bigcap B_i = \varnothing$. Почему? пусть $w \in \bigcap B_i \Rightarrow \exists n : w \in A_n$, но $w \not\in B_n$
+		
+		Тогда по свойству 4 $\lim P(B_n) = 0 = \lim P(A\setminus (A_1 \cup \ldots \cup A_n)) = \lim (P(A) - P(A_1 \cup \ldots \cup A_n)) =
+		P(A) - \lim P(A_1 \cup \ldots \cup A_n) = P(A) - \lim \sum P(A_i) = P(A) - \sum P(A_i) \Rightarrow P$ --- вероятность.
+	\end{description}
+  \end{proof}
+\end{Th}
+
+\begin{example}
+  Классическая вероятность --- это когда $\Omega$ конечна, $\mathcal{A} = 2^{\Omega}, P(A) = \frac{\abs{A}}{\abs{\Omega}}$
+\end{example}
+
+\begin{example}
+  Геометрическая вероятность.
+
+  Пусть $\Omega \subset \mathbb{R} ^n$, и у него есть объём $\mu$. Тогда $\mathcal{A} $ --- все подмножества $\Omega$, у которых есть объём.
+  Тогда $P(A) = \frac{\mu(A)}{\mu(\Omega)}$.
+\end{example}
+
+\begin{example}[Задача о встрече]
+  Пусть есть два студента, у них часовой перерыв, они хотят встретиться. Они договорились, что если один приходит и ждёт более 15 минут, то уходит.
+  Приходят они в случайный момент времени. Какова вероятность, что встретятся?
+
+  Давайте нарисуем две оси, обозначающие время прихода каждого из студентов. Ясно, что встречаются они в некоторой полосе между $y = \frac{1}{4}x - \frac14$
+  и $y = \frac14 x + \frac{1}{4}$. Тогда вероятность встречи $P(A) = \frac{\mu(A)}{\mu(\Omega)} = \frac{7}{16}$.
+\end{example}
+
+\end{document}
+
