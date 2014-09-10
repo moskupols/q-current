@@ -113,5 +113,143 @@ $M=\Braket{ Q,\Sigma,\Delta,q_{0},F} $ --- ДКА, если
 \begin{claim*}
 $\forall q_{1}\in Q\ \forall w\in\Sigma^{\star}\rightarrow\abs{\set{ q_{2}|\Braket{ q_{1},w} \vdash\Braket{ q_{2},\varepsilon} } }\le1$.\end{claim*}
 
+
+\part*{Лекция 2. }
+
+\begin{Th}
+  Для любого языка $L$, распознаваемого некоторым НКА, существует ДКА $M$: $\mathcal{L} = \mathcal{L}(M)$.
+
+  \begin{proof}
+	Пусть $\mathcal{L} = \mathcal{L}(M_0), M_0 = \braket{Q_0, \Sigma, \Delta_0, \bar{q_0}, F_0}$ --- НКА с однобуквенными переходами.
+
+	$Q = 2^{Q_0}, q_0 = {\bar{q_0}}, F = \set{Q' \subseteq Q | Q' \cap F_0 \neq \varnothing}$.
+
+	$M = \braket{Q, \Sigma, \Delta_0, q_0, F}$
+
+	$\Delta(Q', a) = \set{q | \exists q' \in Q' : \braket{q', a, q} \in \Delta_0}$
+
+	$\Delta_M(q, w)$ --- состояние, в которое переходит $M$ по $w$.
+	\begin{lem}
+	  $\Delta_M(q_0, w) = \set{q \in Q_0 | \braket{\bar{q_0}, w} \vdash_{M_0} \braket{q, \varepsilon}}$
+	  \begin{proof}
+		Индукция по $w$.
+
+		База: $w = \varepsilon$. $\Delta_M(q_0m \varepsilon) = q_0 = \set{\bar{q_0}}$
+
+		Шаг: $w = ua, a \in \Sigma$. $\Delta_M(\Delta_M(q_0, u), a) = 
+		\Delta_M(\set{\tilda{q} \in Q_0 | \braket{\bar{q_0}, 1} \vdash_{M_0} \braket{\tilda{q}, \varepsilon}}, a) = 
+		\set{q | \exists \tilda{q} : \braket{\bar{q_0}, u} \vdash \braket{\tilda{q}, \varepsilon} \wedge \braket{\tilda{q}, u, q} \in \Delta_{M_0}} = 
+		\set{q | \braket{\bar{q_0}, ua} \vdash \braket{q, \varepsilon}}$
+	  \end{proof}
+	\end{lem}
+
+	$\mathcal{L}(M) = \set{w | \exists q \in F : \braket{q_0, w} \vdash_M \braket{q, \varepsilon}} = \set{w | \Delta_M(q_0, w) \in F} =
+	\set{w | \set{\tilda{q} \in Q_0 | \braket{\bar{q_0}, w} \vdash \braket{\tilda{q}, \varepsilon}} \in F} =
+	\set{w | \exists \tilda{q} \in Q_0 : \tilda{q} \in F_0 \wedge \braket{\bar{q_0}, w} \vdash \braket{\tilda{q}, \varepsilon}} = \mathcal{L}(M_0)$
+  \end{proof}
+\end{Th}
+
+\begin{Th}
+  Если $L_1, L_2$ --- автоматные языки, то
+  \begin{enumerate}
+	\item $L_1L_2$ --- автоматный.
+	\item $L_1 \cup L_2$ --- автоматный.
+	\item $L_1 \cap L_2$ --- автоматный.
+	\item $L_1^*$ --- автоматный.
+	\item $\Sigma^* - L_1$ --- автоматный.
+  \end{enumerate}
+
+  \begin{proof}
+	\begin{enumerate}
+	  \item $L_1L_2 = \mathcal{L}(M), M = \braket{Q_1 \cup Q_2, \Sigma, \Delta, q_{01}, F_2}.$
+
+		$\Delta = \Delta_1 \cup \Delta_2 \cup set{\braket{q, \varepsilon} \to q_{02} | q \in F_1}$.
+
+	  \item $L_1 \cup  L_2 = \set{\set{q_0} \cup Q_1 \cup Q_2, \Sigma, \Delta, q_0, F_1 \cup F_2}$
+
+		$\Delta = \Delta_1 \cup \Delta_2 \cup set{\braket{q_0, \varepsilon} \to q_{01}, \braket{q_0, \varepsilon} \to q_{02}}$
+
+	  \item $L_1 \cap L_2 = \set{Q_1 \times Q_2, \Sigma, \Delta, \braket{q_{01}, q_{02}}, F_1 \times F_2}$
+
+		$\Delta = \Set{\braket{\braket{q_1, q_2}, a}} \to \braket{q'_1, q'_2} | 
+		\begin{aligned}
+
+		\end{aligned}$
+
+	  \item 
+
+	  \item $ $
+		\begin{define*}
+		  $M = \braket{Q, \Sigma, \Delta, q_0, F}$ --- полный ДКА, если $M$ --- ДКА и $\Delta: Q \times \Sigma \to Q$ всюду определена.
+		\end{define*}
+		\begin{claim}
+		  Любой автоматный язык распознаётся полным ДКА.
+		  \begin{proof}
+			$L = L(M_0), M_0 = \braket{Q, \Sigma, \Delta, q_0, F}$ --- ДКА.
+
+			$L = L(M), M = \braket{Q \cup \set{q_1}, \Sigma, \Delta', q_1, F}$
+
+			$\Delta' = \Delta \cup \set{\braket{q, a} \to q_1 | \lnot (\exists q' : \braket{q, a} \to q' \in A)} \cup
+			\set{}$
+		  \end{proof}
+		\end{claim}
+	\end{enumerate}
+  \end{proof}
+\end{Th}
+
+\section*{Регулярные выражения}
+
+\begin{define*}
+  Множеством регулярных выражений над алфавитом $\Sigma$ $Reg(\Sigma)$:
+  \begin{enumerate}
+	\item $\Sigma \subset Reg(\Sigma))$
+	\item $0, 1 \in Reg(\Sigma)$
+	\item $\forall \alpha, \beta \in Reg(\Sigma) \to \alpha\beta, \alpha + \beta, a^* \in Reg(\Sigma)$.
+  \end{enumerate}
+\end{define*}
+
+\begin{define*}
+  Язык\ldots
+\end{define*}
+
+\begin{Th}
+  Множетва регулярных и автоматных языков совпадают.
+
+  \begin{proof}
+	То, что всякий регулярный язык автоматный, доказывается индукцией по построению регулярного выражения, используя предыдущую теорему.
+
+	Докажем, что всякий автоматный язык регулярен.
+	\begin{define*}[неформальное]
+	  Расширенный автомат --- автомат с регулярными выражениями в качестве меток перехода, такой что между любыми двумя состояниями не более 1 ребра
+	  (этого всегда можно добиться, используя регурярное выражение). 
+	\end{define*}
+
+	\begin{remark*}
+	  Тогда обычный автомат --- частный случай расширенного.
+	\end{remark*}
+
+	\begin{lem}
+	  Всякий язык, задаваемый расширенным автоматом, регулярен.
+	  \begin{proof}
+		Индукция по $|Q|$(числуу состояний).
+
+		База: $|Q| = 1$. $|Q| = 2$ --- показывается регулярка, задаваемая автоматом.
+
+		Переход: Идея в том, чтобы умееньшить число состояний. Можно считать, что завершающих состояний ровно одно. 
+		Тогда $\exists q$ --- не стартовое не завершающее состояние. Рассмотри все пары $q_1, q_2$: $1q = \alpha, q2 = \beta, qq = \gamma$.
+		Теперь добавим переходы $12 = \alpha\gamma^*\beta$. Теперь можно удалить $q$.
+	  \end{proof}
+	\end{lem}
+  \end{proof}
+\end{Th}
+
+\begin{Th}
+  Для любого автоматного языка $L \exists p \in \mathbb{N} \forall w \in L \abs{w} \ge p \to 
+  \exists x, y, z : \abs{xy} \le p, \abs{y} > 0, w = xyz, \forall k \in \mathbb{N} xy^kz \in L$.
+  \begin{proof}
+	$L = L(M), M = \braket{Q, \Sigma, \Delta, q_0, F}$ --- НКА с однобуквенными переходами.
+  \end{proof}<++>
+\end{Th}<++>
+
 \end{document}
 
