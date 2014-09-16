@@ -1,5 +1,7 @@
 \input{../header.tex}
 
+\renewcommand{\NOK}{\mathop{\text{НОК}}\nolimits}
+
 \begin{document}
 
 \title{$\mbox{Теория групп}$}
@@ -11,7 +13,7 @@
 \tableofcontents\newpage{}
 
 \part*{Лекция 1. Группа, подгруппа. Изоморфизм групп.}
-\section*{Группа}
+\section{Группа}
 \begin{define*}
   \emph{Группа}~--- это множество $G$ с определённой на нём бинарной операцией (т.\,е. $\forall a, b \in G$ определён результат операции $a\cdot b \in G$)
   \begin{description}
@@ -85,7 +87,7 @@
   Если $\Omega$ --- произвольное множество, то аналогичное множество будем обозначать $S(\Omega)$. Это тоже группа.
 \end{example}
 
-\section*{Подгруппы}
+\section{Подгруппы}
 
 \begin{define*}
   Пусть $G$ --- группа, $\varnothing \neq H \subset G$. $H$ --- \emph{подгруппа} $G$, если $\forall a, b \in H \to ab \in H, a^{-1} \in H$. 
@@ -120,7 +122,7 @@
   $\abs{\mathcal{D}_n} = 2n$ (по $n$ поворотов и симметрий).
 \end{exercise}
 
-\section*{Изоморфизм}
+\section{Изоморфизм}
 
 \begin{define*}
   Пусть $G$ и $H$ --- две группы. $\varphi: G\to H$ --- \emph{изоморфизм}, если $\varphi$ --- биекция, и $\forall a, b \to$
@@ -187,6 +189,230 @@
 \begin{example}
   $r\in D_{n}$ --- поворот на $\frac{2\pi}{n}$. Тогда $\left(r\right)\cong\mathbb{Z}_{n}$.
 \end{example}
+
+
+\part*{Лекция 2.}
+
+Давайте перед тем, как пойдём дальше, предъявим ещё парочку примеров подгрупп, порождённых каким-то множеством.
+
+\section{Циклические подгруппы}
+
+\begin{example}
+  \begin{enumerate}
+	\item Каким наилучшим образом можно породить $\mathbb{Z}_n$?$\mathbb{Z}_n = (1)$.
+	\item Пусть $(1) = H$. Верно ли, что $H = \mathbb{Z}$? Да, т.к. $1, 1+1, \cdots, -1, -1 - 1, \cdots$.
+  \end{enumerate}
+\end{example}
+
+\begin{define*}
+  Если $M \subset G$ таково, что $(M) = G$, то $F$ \emph{порождена} $M$, а $M$ --- \emph{порождающее множество} для $G$.
+\end{define*}
+
+\begin{example}
+  $GL_n(F) = (\set{\mbox{элементарные матрицы}})$: любая невырожденная матрица раскладывается в произведение элементарных матриц.
+\end{example}
+
+\begin{define*}
+  Группа $G$ называется \emph{циклической}, если она порождена одним элементом, т. е. $G = (g)$ для некоторого $g \in G$.
+\end{define*}
+
+\begin{remark*}
+  В любой группе есть циклическая подгруппа (подгруппы).
+\end{remark*}
+
+\begin{Th}
+  Если $G$ --- циклическая группа, то либо $G \cong \mathbb{Z}$, либо $G \cong \mathbb{Z}_n$.
+  \begin{proof}
+	Раз $G$ --- циклическая группа, $G = (g)$, $g \in G$. Рассмотрим все степени $g$. 
+
+	А что такое степени, кстати? $g^0 = e$. Если $n > 0$, $g^n = g \cdot g \cdot g \cdot \ldots \cdot g$.
+	Если $n < 0$, $g^n = g^{-1} \cdot \ldots \cdot g^{-1}$.
+
+	\begin{exercise}[доказательство не закончилось, но это важный факт]
+	  $g^{k+l} = g^k \cdot g^l$, $(g^k)^l = g^{kl}$.
+	\end{exercise}
+
+	\begin{claim}[Следствие]
+	  $(g^k)^{-1} = g^{-k}$: $g^k \cdot g^{-k} = g^{k-k} = g^0 = e$.
+	\end{claim}
+
+	Итак, рассмотрим все степени $g$. Возможны два случая:
+	\begin{enumerate}
+	  \item Все выписанные степени $g$ различны. Однако мы выписали всю $G$, так как это циклическая группа. 
+		Тогда рассмотрим $\varphi: \mathbb{Z} \to G, \varphi(k) = g^k$. 
+		Это биекция, $\varphi(k+l)=\varphi(k)\cdot\varphi(l)$, $\varphi(-k)=\varphi(k)^-1$.
+		Значит $\varphi$ --- изоморфизм, т.е. $g \cong \mathbb{Z}$.
+
+	  \item $\exists k \neq l : g^k = g^l  \Rightarrow g^{k-l} = g^k\cdot (g^l)^{-1} = e = g^{l-k}$. Это значит, что $g$ в некоторой степени 
+		суть единичный элемент: $\exists n \in \mathbb{N} : g^n = e$. Пусть мы выбрали наименьшее из всех возможных $n$.
+
+		Тогда $g^0, g^1, \ldots, g^{n-1}$ попарно различны и образуют всю группу: $G = \set{g^0, \ldots, g^{n-1}}$.
+
+		Пусть первое неверно, $g^k = g^l, 0 \le k < l < n \Rightarrow g^{l-k} = e \Rightarrow n$ не минимально.
+
+		Пусть второе неверно, $\forall k \in \mathbb{Z} \to k = qn + r, q, r \in \mathbb{Z}, 0 \le r < n$.
+
+		Наконец, пусть $\varphi: \mathbb{Z}_n \to G, \varphi(k) = g^k$. Вспомним теперь, что $\mathbb{Z}_n$ --- остатки от деления на $n$,
+		тогда $\varphi$ --- биекция (по двум только что доказанным фактам), и $\varphi(k + l) = g^{k+l}$ либо $\varphi(k+l) = g^{k+l-n}$,
+		но тогда в любом случае $g^{k+l} = \varphi(k) + \varphi(l)$, значит мы предъявили изоморфизм, значит $G \cong \mathbb{Z}_n$.
+	\end{enumerate}
+  \end{proof}
+\end{Th}
+
+\begin{remark*}
+  Вообще, мы сейчас доказали, что $G \cong \mathbb{Z}_n$. Однако т.к. изоморфизм --- обратимая транзитивная операция, отношение изоморфности является отношением эквивалентности.
+\end{remark*}
+
+\section{Порядок элемента. Теорема Кэли}
+
+\begin{define*}
+  Пусть $G$ --- группа, $g \in G$. \emph{Порядок элемента} $g$ --- минимальное $n \in \mathbb{N}: g^n = e$. Если такого $n$ нет, то порядок $g$ --- бесконечность.
+
+  \emph{Обозначение}: $\ord g, \abs{g}$.
+\end{define*}
+
+\begin{claim}
+  $\abs{g} = \abs{(g)}$.
+  \begin{proof} $ $
+
+	\begin{itemize}
+	  \item 
+		Если $(g) \cong \mathbb{Z}$, то $\abs{g} = \infty$.
+	  \item 
+		Если $(g) \cong \mathbb{Z}_n$, то $\abs{g} = n$.
+	\end{itemize}
+  \end{proof}
+\end{claim}
+
+\begin{Th}
+  Подгруппа циклической группы --- циклическая.
+
+  \begin{proof}
+	Можно считать, что $G = \mathbb{Z}$ или $G = \mathbb{Z}_n$.
+	\begin{enumerate}
+	  \item $G = \mathbb{Z}$. Пусть $H \subseteq \mathbb{Z}$. Если $H = (0)$, то очевидно. Иначе
+		выберем $h \in H, h \neq 0$ с наименьшим $\abs{h}$. Тогда $H \ge (h) = h\mathbb{Z}$ --- подмножество всех элементов, кратных $h$.
+
+		Пусть $H \neq (h)$(если совпадают, всё доказано). Тогда $\exists g \in H\setminus(h)$. $g = qh + r$; $q, r \in \mathbb{Z}$, $0 \le r < \abs{h}$.
+
+		Тогда $r = g - qh \in H$, что противоречит с выбором $h$, если $r \neq 0$. Тогда $r = 0$, и $h | g, g \in (h)$. Итак, $H = (h)$.
+
+	  \item $G = \mathbb{Z}_n$. Доказательство ничем, по сути, не отличается. Проходит то же самое рассуждение, если считать $g$ и $h$ целыми числами.
+
+		При этом $h | n$: если $n = qh + r$, то $r = n - qh = -qh \in H$. Если $r \neq 0$, то это противоречит с выбором $h$.
+	\end{enumerate}
+
+	Итак, в обоих случаях $H = (h)$, при этом во втором случае, если $h \neq 0$, то $h | n$. 
+  \end{proof}
+\end{Th}
+
+\begin{remark*}
+  В 2-порождённой группе могут быть подгруппы, порождённые любым количеством элементов.
+\end{remark*}
+
+\begin{remark*}
+  \emph{Знак перестановки} $(-1)^\sigma = sgn \sigma = (-1)^{n(\sigma)}$, где $N(\sigma)$ --- количество инверсий в $\sigma$.
+
+  Значит, $A_n = \set{\sigma \in S_n: (-1)^{\sigma} = 1} \le S_n$ --- знакопеременная группа
+\end{remark*}
+
+\begin{Th}[Кэли]
+  Если $G$ --- группа, $\abs{G} = n$, то $G$ изоморфно подгруппе в $S_n$.
+
+  \begin{proof}
+	$S_n \cong S(G) = \set{\mbox{биекции из $G$ в $G$}}$. 
+	
+	Пусть $h \in G$. Определим $\varphi_h: G\to G, \varphi_h(g) = hg$. Это биекции, потому что $hg_1 = hg_2 \Rightarrow 
+	h^{-1}hg_1 = h^{-1}hg_2 \Rightarrow g_1 = g_2$.
+
+	Итак, $\varphi_h \in S(G)$. 
+	
+	Пусть $h_1, h_2 \in G$. $\varphi_{h_1,h_2}(g) = h_1h_2g = \varphi_{h_1}(\varphi_{h_2}(g)) = \varphi_{h_1} \circ \varphi_{h_2} (g)$.
+
+	Кроме того, $\varphi_e(g) = g$.
+	
+	Итак, $H = \set{\varphi_h: h \in G}$ --- подгруппа в $S(G)$: $\varphi_{h_1}\circ\varphi_{h_2} = \varphi_{h_1,h_2} \in H$;
+
+	$\varphi_h \circ \varphi_{h^{-1}} = \varphi_e = id = \varphi_{h^{-1}} \circ \varphi_h \Rightarrow
+	(\varphi_h)^{-1} = \varphi_{h^{-1}} \in H$.
+
+	Наконец, $G \cong H$: $\pi: G \to H, \pi(h) = \varphi_h$ --- изоморфизм.
+
+	Сохранение операций: $\pi(h_1, h_2) = \varphi_{h_1,h_2} = \varphi_{h_1} \circ \varphi_{h_2} = \pi(h_1) \circ \pi_{h_2}$. 
+	Нетрудно показать также, что $\pi$ --- биекция.
+  \end{proof}
+\end{Th}
+
+Пусть $\sigma \in S_n$. Стандартная запись --- табличная: $\sigma = ({1 \atop \sigma(1)} {2 \atop \sigma(2)} \cdots {n \atop \sigma(n)})$.
+
+\begin{define*}
+  Пусть $a_1, \ldots, a_n \in [n]$ --- различные элементы. Тогда \emph{циклом} $a_1, \ldots, a_k$ называется перестановка $\sigma:
+  \sigma(a_i) = a_{i+1}, 1 \le i \le k-1, \sigma(a_k) = a_1, \sigma(b) = b, b > k$. Число $k$ называется \emph{длиной} этого цикла.
+  Цикл длины 2 называется\emph{ транспозицией}.
+
+  Семейство циклов $\sigma_1, \ldots, \sigma_t$\emph{ независимое}, если $\forall a \in [n] \to $ есть не более одного цикла
+  в семействе: $\sigma(a) \neq a$.
+\end{define*}
+
+\begin{example} $ $
+
+  $(12) (346) (57)$ --- независимое.
+
+  $(12) (345) (57)$ --- зависимое.
+\end{example}
+
+\begin{claim}$ $
+  \begin{enumerate}
+	\item Любая перестановка $\sigma \in S_n$ раскладывается в произведение независимых циклов (оно может состоять из одного или нуля элементов,
+	  если она сама цикл или тождественная соответственно).
+
+	\item Если $\sigma_1, \sigma_2$ --- независимые циклы, то $\sigma_1\sigma_2 = \sigma_2\sigma_1$.
+  \end{enumerate}
+
+  \begin{proof} $ $
+
+	\begin{enumerate}
+	  \item Нарисуем орграф перестановки с множеством вершин $[n]$ и рёбрами $k \to \sigma(k)$.
+
+		$\deg_-k = \deg_+k = 1$ ($\sigma^{-1}(k)$). Это значит, что граф разбивается в несвязное объединение ориентированных циклов.
+
+		Эти циклы в графе соответствуют независимым циклам в группе $S_n$.
+
+	  \item Если $\sigma_1, \sigma_2$ --- независимые циклы, то $\forall k \in [n] \to \sigma_1(k) = k \lor \sigma_2(k) = k$.
+		Пусть $\sigma_1(k) = k$.
+
+		$\sigma_2\circ \sigma_1(k) = \sigma_2(\sigma_1(k)) = \sigma_2(k)$. 
+
+		Если $\sigma_2(k) \neq =k$, то $\sigma_2(\sigma_2(k)) \neq \sigma_2(k)$. Так как циклы независимы, 
+		это значит, что $\sigma_1 \circ \sigma_2(k) = \sigma_1(\sigma_2(k)) = \sigma_2(k)$
+
+		Если же $\sigma_2(k) = k$, то $\sigma_1 \circ \sigma_2(k) = k = \sigma_2 \circ \sigma_1(k)$.
+
+		Итак, $\sigma_1 \circ \sigma_2 (k) = \sigma_2 \circ \sigma_1 (k)$
+	\end{enumerate}
+  \end{proof}
+\end{claim}
+
+\begin{claim}
+  Если $\sigma_1, \ldots, \sigma_n$ --- независимые циклы, то $(\sigma_1, \ldots, \sigma_k)^k = \sigma_1^k \circ \ldots \circ \sigma_k^k$.
+\end{claim}
+
+\begin{claim}
+  Если $\sigma$ -- произведение независимых циклов длин $l_1, \ldots, l_t$, то $\abs{\sigma} = \NOK(l_1, \ldots, l_k)$.
+
+  \begin{proof}
+	$\ord(a_1, \ldots, a_k) = k$. Тогда $\sigma = \tau_1 \cdots \tau_t$, то $\sigma^{\NOK(l_1, \ldots, l_t)} = 
+	\tau_1^{\NOK(\ldots)} \cdots \tau_t^{\NOK(\ldots)}$.
+
+	Если же $0 < N < \NOK(l_1, \cdots, l_k)$, то $N \not: l_i$. Тогда $\sigma^N = \tau_1^N \cdots \tau_i^N \cdots \tau_t^N$ --- не тождественное преобразование.
+
+	Тогда и $\sigma$ --- не тождественное.
+  \end{proof}
+\end{claim}
+
+\part*{Лекция 3}
+
+$\lhd \rhd \unlhd \unrhd$
 
 \end{document}
 
