@@ -12,7 +12,7 @@
 
 \part*{Лекция 1. Вероятность. Вероятностное пространство. Алгебра}
 
-\section*{Базовые определения}
+\section{Базовые определения}
 
 \begin{define*}
   $\Omega = \set{w1, \ldots, w2}$ --- \emph{множество элементарных событий} (\emph{элементарных исходов}).
@@ -101,7 +101,7 @@
   \end{enumerate}
 \end{define*}
 
-\section*{Свойства алгебры и вероятностной меры}
+\section{Свойства алгебры и вероятностной меры}
 
 \begin{remark*}[Свойства алгебры] $ $
   \begin{enumerate}
@@ -186,10 +186,191 @@
 
 \begin{example}[Задача о встрече]
   Пусть есть два студента, у них часовой перерыв, они хотят встретиться. Они договорились, что если один приходит и ждёт более 15 минут, то уходит.
-  Приходят они в случайный момент времени. Какова вероятность, что встретятся?
+  Приходят они в случайный момент времени в пределах перерыва. Какова вероятность, что встретятся?
 
-  Давайте нарисуем две оси, обозначающие время прихода каждого из студентов. Ясно, что встречаются они в некоторой полосе между $y = \frac{1}{4}x - \frac14$
-  и $y = \frac14 x + \frac{1}{4}$. Тогда вероятность встречи $P(A) = \frac{\mu(A)}{\mu(\Omega)} = \frac{7}{16}$.
+  Давайте нарисуем две оси, обозначающие время прихода каждого из студентов. Ясно, что встречаются они в некоторой полосе между $y = x - \frac14$
+  и $y = x + \frac14$. 
+  
+  Тогда вероятность встречи $P(A) = \frac{\mu(A)}{\mu(\Omega)} = \frac{7}{16}$.
+\end{example}
+
+
+\part*{Лекция 2. Условные вероятности. Независимость событий}
+
+\section{Условная вероятность}
+
+Предположим, у нас есть полка, на ней три книги: Толстого, Пушкина, Горького. Вероятность наугад вытянуть Пушкина --- $\frac13$ .
+Но если вы уверены, что не возьмёте Горького, то уже $\frac12$. Как это посчитать? $\frac12 = \frac{\frac13}{\frac23}$.
+
+\begin{define*}
+  Пусть $(\Omega, \mathcal{F}, P)$ --- вероятностное пространство, $A, B \in \mathcal{F} $. Тогда \emph{условной вероятностью} $P(A|B)$ 
+  называется $\frac{P(A\cap B)}{P(B)}$ (0, если $P(B) = 0$).
+\end{define*}
+
+\begin{example}
+  Вспомним задачу про студентов. Пусть событие $A$ --- факт встречи, 
+  событие $B$ --- ``хотя бы один из студентов пришёл позже 15 минут от начала отсчёта''. 
+  Получается, при условии $B$ на прошлом графике мы как бы вырезаем квадратик в углу. Тогда
+  $P(A|B) = \frac{P(A\cap B)}{P(B)} = \frac{\mu(A\cap B)}{\mu(B)} = \frac{1 - 9/16 - 1/16}{1 - 1/16} = \frac{1}{5}$.
+\end{example}
+
+\begin{claim}
+  Если $B \in \mathcal{F} $ --- событие: $P(B) > 0$, то $P(\cdot |B)$ --- вероятностная мера на $(\Omega, \mathcal{F} )$.
+
+  \begin{proof}
+	\begin{enumerate}
+	  \item $P(\Omega|B) = \frac{P(\Omega \cup B)}{P(B)} = 1$
+	  \item Пусть $A_1, A_2, \ldots \in \mathcal{F}, \forall i \neq j \to A_i \cap A_j =  \varnothing $
+
+		\[
+		  P\left(\bigcup A_i | B\right) = \frac{P\bigl((\bigcup A_i) \cup B\bigr)}{P(B)} 
+		  = \frac{P\bigl(\bigcup (A_i \cap B)\bigr)}{P(B)} = \frac{\sum P(A_i \cap B)}{B}
+		  = \sum \frac{P(A_i \cap B)}{B} = \sum P(A_i | B)
+		\]
+	\end{enumerate}
+  \end{proof}
+\end{claim}
+
+\begin{claim}[Формула полной вероятности]
+  Пусть $(\Omega, \mathcal{F}, P)$ --- вероятностное пространство, $D_1, D_2, \ldots \in \mathcal{F}, \forall i \neq j \to D_i \cap D_j = \varnothing$, 
+  $A \in \mathcal{F} $.
+  Тогда $P(A) = \sum_{i=1}^\infty P(A | D_i)P(D_i)$
+
+  \begin{proof}
+	$A = \bigcup_{i=1}^\infty (D_i \cap A)$, при этом $(D_i \cap A) \cap (D_j \cap A) = \varnothing$.
+
+	Следовательно, $P(A) = \sum P(A\cap D_i), P(A|D_i) = \frac{P(A\cap D_i)}{P(D_i)}$ при $P(D_i \neq 0) \Rightarrow 
+	P(A\cap D_i) = P(A|D_i)P(D_i)$.
+
+	Итак, $P(A) = \sum_{i=1}^\infty P(A|D_i)P(D_i)$.
+  \end{proof}
+\end{claim}
+
+\begin{remark*}
+  Разбиение не обязано быть счётным, может быть и конечным.
+\end{remark*}
+
+\begin{example}
+  Есть $n$ шаров, из них $k$ чёрных и $n-k$ белых. Мы по очереди достаём шары, не возвращая обратно. Какова вероятность в $j$-й раз вытянуть чёрных шар?
+
+  Какова, для начала, вероятность в первый раз вытянуть чёрный? $\frac{k}{n}$. Утверждается, что эта вероятность не изменится. 
+  Приведём доказательство тремя способами.
+
+  \begin{proof}
+	\begin{enumerate}
+	  \item 
+		Занумеруем шары: $\set{1,\ldots,n}$. $\Omega = \set{(i_1,\ldots,i_j) \mbox{ --- различные числа из } \set{1,\ldots n}}$.
+		Пусть $A = \set{(1,i_2,\ldots,i_j)}$, то есть событие, когда первым мы вытянули шар номер 1, и $B = \set{(i_1,\ldots,i_{j-1},1)}$. 
+		Проведя несложную биекцию, можно показать, что в $A$ и $B$ одинаковое число элементов.
+
+		Пусть первые $k$ номеров чёрные, тогда
+		\begin{gather*}
+		  P(\mbox{\Small при $j$-том выборе вытянут чёрный шар}) 
+		  = P(\mbox{\Small при $j$-том выборе выбран шар $i \le k$}) =\\
+		  = \sum_{i=1}^k P(\mbox{\Small при первом выборе выбран шар $i$})
+		  = P(\mbox{\Small первый раз выбран чёрный шар}) = \frac{k}{n}.
+		\end{gather*}
+
+	  \item (В лоб формулой полной вероятности). 
+		Пусть $D_i$ --- событие ``После $(j-1)$-ого выбора осталось $i$ чёрных шаров.'' Пусть $A_j$ --- интересующее нас событие.
+
+		\begin{gather*}
+		  P(A_j) = \sum_{i=\max(k-j+1,0)}^{\min(k, n-j-1)} P(A_j | D_i)P(D_i) = \\
+		  \sum \frac{i}{n - j + 1} \frac{C_{j-1}^{k-i} \cdot k(k-1)\cdots(k-(k-i)+1)}{(n-k)(n-k-1)\cdots(n-k-(j-1)+1)} = 
+		  \frac{C_{n-1}^{k-1}}{C_{n}^{k}} = \frac{k}{n}
+		\end{gather*}
+
+	  \item (По индукции).
+		Пусть $D_0$ --- событие ``При первом вытягивании выбран чёрный'', $D_1$ --- событие ``При первом вытягивании выбран белый''.
+
+		Мы знаем, что $P(A_1) = \frac{k}{n}$. Предположим, что $P(A_{i-1}) = \frac{k}{n}$, и докажем переход:
+		\begin{gather*}
+		  P(A_j) = P(A_j | D_0)P(D_0) + P(A_j | D_1)P(D_1) = \\ = \frac{k-1}{n-1}\frac{k}{n} + \frac{k-1}{n-1}\frac{n-k}{n}
+		  = \frac{k^2 - k + kn - k^2}{n(n-1)} = \frac{k(n-1)}{n(n-1)} = \frac{k}{n}.
+		\end{gather*}
+	\end{enumerate}
+  \end{proof}
+\end{example}
+
+Перейдём к формуле, которую удобно использовать, исходя из того, что произошло в итоге.
+
+\begin{claim}[Формула Байеса]
+  Пусть $(\Omega, \mathcal{F}, P)$ --- вероятностное пространство, $\Omega = D_1 \cup D_2 \cup \ldots, A \in \mathcal{F}, P(A) > 0$. Тогда
+  \[
+	P(D_n|A) = \frac{P(D_n \cap A)}{P(A)} = \frac{P(A|D_n)P(D_n)}{\sum_k^{\infty} P(A|D_n)P(D_k)}.
+  \]
+\end{claim}
+
+\begin{example}
+  Снова вспомним про студентов. Такая интерпретация: сторонний наблюдатель увидел, что они встретились.
+  Какова вероятность, что они встретились позже, чем в первые 15 минут?
+  
+  $D_0$ --- ``оба пришли в первые 15 минут'', $D_1 = \Omega \setminus D_0$.
+  $P(D_1|A) = \frac{P(A|D_1)P(D_1)}{P(A|D_0)P(D_0) + P(A|D_1)P(D_1)} = 
+  \frac{\frac1{5}\cdot\left(1-\frac1{16}\right)}{1\cdot\frac1{16} + \frac{2}{5}\left(1-\frac{1}{16}\right)} = \frac{6}{7}$.
+\end{example}
+
+\section{Независимость событий}
+
+Говоря житейским языком, события независимы, если одно не зависти от другого, т.е. условная вероятность не зависит от условия.
+
+\begin{define*}
+  События $A, B \in \mathcal{F} $ называются \emph{независимыми}, если $P(A\cap B) = P(A)P(B)$.
+\end{define*}
+
+\begin{remark*}
+  Определение становится естественным, если расписать:
+  $P(A) = \frac{P(A\cap B)}{P(A)} = P(A|B)$
+\end{remark*}
+
+\begin{define*}
+  События $A_1, \ldots, A_n$ называются \emph{независимыми в совокупности}, если $\forall k_1,\ldots,k_j \in \set{1,\ldots,n}, k_q \neq k_p \to 
+  P(\bigcap A_{k_j}) = \prod P(A_{k_j})$.
+
+  События называются \emph{попарно независимыми}, если $\forall i \neq j \to P(A_i\cap A_j) = P(A_i)P(A_j)$.
+\end{define*}
+
+\begin{remark*}
+  Из независимой совокупности следует попарная, обратное неверно.
+\end{remark*}
+
+\begin{example}
+  Пусть у нас есть тетраэдр, у которого три грани покрашены каждая в свой цвет, а четвёртая --- во все три. 
+  Тогда события вида ``после броска мы увидели цвет $x$'' попарно независимы, но не в совокупности.
+
+  $\Omega = \set{w_1, w_2, w_3, w_4}, A= \set{w_1, w_4}, B = \set{w_2, w_4}, C = \set{w_3,w_4}$
+
+  $P(A\cap B) = P(\set{w_4}) = \frac{1}{4} = \frac{1}{2} \cdot \frac{1}{2} = P(A)P(B)$ --- попарная независимость.
+  
+  $P(A\cap B\cap C) = P(\set{w_4}) = \frac{1}{4} \neq (\frac{1}{2})^3$
+\end{example}
+
+\begin{define*}
+  События $\set{A_\gamma | \gamma \in \Gamma}$ \emph{независимы в совокупности}, если для любых различных $\gamma_1, \ldots, \gamma_n \in \Gamma$
+  $P(\bigcap A_{\gamma_i}) = \prod P(A_{\gamma_i})$.
+
+  Пусть $M_1, \ldots, M_n$ --- системы событий. Они \emph{независимы в совокупности}, если $\forall A_i \in M_i$ независимы в совокупности.
+\end{define*}
+
+\begin{example}
+  Пусть $A_1,\ldots,A_n$ --- независимы в совокупности. Тогда $\mathcal{F}_{A_i}$ --- независимы в совокупности. 
+  ($\mathcal{F}_A = \set{\varnothing, A, \overline{A}, \Omega}$).
+
+  \begin{proof}
+	Пусть $B_i \in \mathcal{F}_i, i_1,\cdots,i_k \in \set{1,\cdots,n}$.
+
+	Если $B_{i_j} \neq \varnothing$, то $P(\bigcap B_{i_j}) = 0 = \prod P(B_{i_j})$.
+
+	Если $B_{i_j} = \Omega$, то $P(\bigcap B_{i_r}) = P(\bigcap_{r\neq j} B_{i_r}) = \prod_{r\neq j}P(B_{i_r})$.
+
+	Если отрицаний 0, то всё доказано. Пусть доказано для $j$ отрицаний, докажем для $j+1$.
+
+	Пусть $B_{i_1} = \overline{M_1}$
+
+	$P\left(\bigcap B_{i_r}\right) = P\left(\overline{A_{i_1}} \cap \bigcap_{r>1}B_{i_r}\right) 
+	= P\left(\bigcap B_{i_r}\right) - P\left(\overline{A_{i_1}} \cap \bigcap_{r>1}B_{i_r}\right) 
+	= \prod_{r>1} P(B_{i_r}) \cdot (1-P(A_{i_1})) = \prod P(B_i)$.
+  \end{proof}
 \end{example}
 
 \end{document}
