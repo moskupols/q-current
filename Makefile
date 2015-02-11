@@ -16,7 +16,7 @@ commit: all
 	git add header.tex template.tex .gitignore $(SOURCES)
 	git commit
 
-%.pdf: %.tex
+%.pdf: %.tex header.tex
 	cd $(dir $@) && latexmk -pdf -interaction=nonstopmode $(notdir $(@:.pdf=.tex))
 
 clean:
