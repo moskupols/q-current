@@ -6,4 +6,6 @@
 *.pdf
 *.dvi
 *.ps
+*latexmk
+*.fls
 

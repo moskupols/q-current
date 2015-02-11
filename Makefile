@@ -1,10 +1,9 @@
 SHELL=bash
 
-SUBJECTS=groupth danalysis diff_equations formal_langs probabilities
+SUBJECTS:=optimization
 PDFS_DIR=pdfs
 
 SOURCES=$(foreach subj,$(SUBJECTS),$(subj)/$(subj).tex)
-AUXS=$(SOURCES:.tex=.aux)
 TEMP_TARGETS=$(SOURCES:.tex=.pdf)
 TARGETS=$(addprefix $(PDFS_DIR)/,$(addsuffix .pdf,$(SUBJECTS)))
 
@@ -17,11 +16,8 @@ commit: all
 	git add header.tex template.tex .gitignore $(SOURCES)
 	git commit
 
-%.pdf: %.aux %.tex
-	cd $(dir $@) && pdflatex -interaction=nonstopmode $(notdir $(@:.pdf=.tex))
-
-%.aux: %.tex
-	cd $(dir $@) && pdflatex -interaction=nonstopmode $(notdir $(@:.aux=.tex))
+%.pdf: %.tex
+	cd $(dir $@) && latexmk -pdf -interaction=nonstopmode $(notdir $(@:.pdf=.tex))
 
 clean:
 	rm -f $(SOURCES:.tex=.{out,log,aux,pdf,toc,dvi})
