@@ -20,5 +20,5 @@ commit: all
 	cd $(dir $@) && latexmk -pdf -interaction=nonstopmode $(notdir $(@:.pdf=.tex))
 
 clean:
-	rm -f $(SOURCES:.tex=.{out,log,aux,pdf,toc,dvi})
+	rm -f $(SOURCES:.tex=.{out,log,aux,pdf,toc,dvi,fls,fdb_latexmk})
 
