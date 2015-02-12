@@ -1,6 +1,6 @@
 SHELL=bash
 
-SUBJECTS:=optimization
+SUBJECTS:=optimization rings
 PDFS_DIR=pdfs
 
 SOURCES=$(foreach subj,$(SUBJECTS),$(subj)/$(subj).tex)

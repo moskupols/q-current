@@ -1,0 +1,180 @@
+\input{../header.tex}
+
+\begin{document}
+
+\title{Теория колец и полей}
+\author{Фёдор Алексеев}
+\raigorname{Дмитрий Геннадьевич Ильинский}
+
+\maketitle
+\gitlink{}
+\tableofcontents\newpage{}
+
+\section*{Оргвопросы}
+\label{sec:organization}
+К экзамену будут известны списки вопросов на $2$, на $3$--$4$, $5$--$6$, $7$--$8$ и $9$--$10$.
+
+После прихода на экзамен вам последовательно выдаются листочки с вопросами из разных групп.
+На экзамен даётся три часа.
+
+Ещё в какой-то момент будет контрольная, её вопросы тоже будут известны заранее.
+
+Курс из трёх частей:
+\begin{itemize}
+  \item обобщения основной теоремы арифметики, теория делимости
+  \item расширения полей, основная теорема алгебры, конечные поля(, коды БЧХ)
+  \item $Q \rightarrow R$, $Q \rightarrow Q_p$
+\end{itemize}
+
+\section{First}
+\label{sec:first}
+
+\begin{define*}
+  $\braket{K, +, \cdot}$~--- кольцо, если 
+  \begin{enumerate}
+    \item $\braket{K,+}$~--- абелева группа
+    \item дистрибутивность:
+  \end{enumerate}
+\end{define*}
+
+Можно добавлять ещё свойства, например:
+\begin{itemize}
+  \item ассоциативность: $\forall a,b,c \in K \rightarrow (ab)c = a(bc)$
+  \item единица: $\exists 1 \in K : \forall a \in K \rightarrow a\cdot 1 = 1 \cdot a = a$
+  \item коммутативность: $\forall a, b \rightarrow ab=ba$
+  \item обратимость: $\forall K \ni g\ne 0 \rightarrow \exists b : gb = bg = 1$
+\end{itemize}
+
+\begin{define*}
+  Коммутативное кольцо~--- ассоциативное коммутативное кольцо с единицей. Буквой $K$ обозначают коммутативные кольца.
+\end{define*}
+
+\begin{example}[кольца без единицы]
+  Удвоенные целые числа.
+\end{example}
+
+\begin{example}[некоммутативного кольца с единицей]
+  $M_n(R)$, кольцо матриц.  
+\end{example}
+
+\begin{example}
+  $\braket{M_n(R), +, [,]}$, $[A,B] = AB-BA$
+  
+  $[[A,B],C] + [[B,C],A] + [[C,A],B] = 0$
+\end{example}
+
+\begin{example}
+  $\set{0}$~--- коммутативное кольцо, да. Можно называть его тривиальным.
+\end{example}
+
+Чем отличается $Z$ от просто коммутативного кольца? В нём нет делителей нуля.
+
+\begin{define*}
+  Область целостности~--- коммутативное кольцо, в котором нет делителей нуля.
+\end{define*}
+
+\begin{example}[делителя нуля]
+    $2\cdot3 = 0$ в $Z_6$.
+\end{example}
+
+Рассмотрим множество $\Set{a+b\cdot z | a,b \in Z, z \in C}$. Это кольцо?
+
+Рассмотрим гауссовы числа: $\Set{a+bi | a,b \in Z} = Z[i]$.
+
+\begin{itemize}
+    \item $(a+bi)+(c+di) = (a+c)+ (b+d)i \in Z[i]$
+    \item $(a+bi)\cdot(c+di) = (ac-bd) + (ad+bc)i \in Z[i]$
+    \item $0 + 0i \in Z[i]$
+    \item $1 + 0i \in Z[i]$
+    \item $a+bi \in Z[i] \Rightarrow (-a) + (-b)i \in Z[i]$
+    \item нет делителей нуля
+\end{itemize}
+
+\begin{define*}
+  $F$~--- поле, если
+  \begin{itemize}
+    \item это коммутативное кольцо
+      \item $\forall a\ne 0 \in F \rightarrow \exists b \in F : ab = ba = 1$
+      \item $1 \ne 0$
+  \end{itemize}
+\end{define*}
+
+\begin{claim}
+  В поле нет делителей нуля.
+\end{claim}
+
+\begin{proof}
+  Пусть $a$~--- делитель нуля: $\exists b : ab = 0$.
+
+  $$
+    0 = ab \Rightarrow 0a^{-1} = (ba)a^{-1} = b(ba^{-1}) = b\cdot 1 = b
+  $$
+\end{proof}
+
+Пусть $K$~--- область целостности.
+$a|b \Leftrightarrow \exists c : ac = b$.
+
+Свойства делимости:
+
+\begin{enumerate}
+  \item $a | b, b | c \Rightarrow a | c$
+    \item $a | b, a | c \Rightarrow a | (b+c)$
+    \item $a | 1 \Rightarrow \exists b : ab = 1 \Rightarrow a$~--- обратимый элемент.
+      В этом случае любой элемент $K$ делится на $a$.
+
+      \begin{proof}
+        Пусть $x\in K$. Тогда $x = 1\cdot x = a(a^{-1}x) \Rightarrow a|x$
+      \end{proof}
+\end{enumerate}
+
+\begin{example}
+  В $Z$ обратимых элемента два: $1, -1$.
+\end{example}
+
+\begin{define*}
+  Пусть $K^* \subset K$~--- множество обратимых элементов. Тогда $K^*$ называется подгруппой обратимых элементов.
+\end{define*}
+
+\begin{exercise}
+  $K^*$~--- группа по умножению.
+\end{exercise}
+
+\begin{define*}
+  $a \sim b$, или $a$ и $b$ ассоциированы, если $\exists r \in K^* : a = rb$
+\end{define*}
+
+\begin{exercise}
+  ``$\sim$''~--- отношение эквивалентности.
+\end{exercise}
+
+\begin{Th}[основная теорема арифметики]
+  Любой элемент поля раскладывается единственным образом в произведение простых
+\end{Th}
+\begin{proof}
+  План доказательства:
+  \begin{enumerate}
+    \item простые числа делятся на себя и на 1.
+    \item любое число раскладывается в произведение простых.
+    \item $p$ простое $\Rightarrow ab : p \Longrightarrow a:p \lor b:p$
+    \item единственность разложения на простые.
+  \end{enumerate}
+\end{proof}
+
+\begin{define*}
+  Элемент кольца называется неприводимым, или неразложимым, если 
+  \begin{enumerate}
+      \item $x \not\in K^* \cup \set{0}$.
+      \item $x = ab \Longrightarrow a \in K^* \lor b \in K^*$
+  \end{enumerate}
+\end{define*}
+
+\begin{define*}
+  $x \in K$ называется простым, если
+  \begin{enumerate}
+    \item $x \not\in K^* \cup \set{0}$.
+    \item $x | ab \Longrightarrow x | a \lor x | b$.
+  \end{enumerate}
+\end{define*}
+
+\end{document}
+
