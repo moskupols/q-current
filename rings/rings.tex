@@ -23,7 +23,7 @@
 \begin{itemize}
   \item обобщения основной теоремы арифметики, теория делимости
   \item расширения полей, основная теорема алгебры, конечные поля(, коды БЧХ)
-  \item $Q \rightarrow R$, $Q \rightarrow Q_p$
+  \item $Q \to R$, $Q \to Q_p$
 \end{itemize}
 
 \section{First}
@@ -39,10 +39,10 @@
 
 Можно добавлять ещё свойства, например:
 \begin{itemize}
-  \item ассоциативность: $\forall a,b,c \in K \rightarrow (ab)c = a(bc)$
-  \item единица: $\exists 1 \in K : \forall a \in K \rightarrow a\cdot 1 = 1 \cdot a = a$
-  \item коммутативность: $\forall a, b \rightarrow ab=ba$
-  \item обратимость: $\forall K \ni g\ne 0 \rightarrow \exists b : gb = bg = 1$
+  \item ассоциативность: $\forall a,b,c \in K \to (ab)c = a(bc)$
+  \item единица: $\exists 1 \in K : \forall a \in K \to a\cdot 1 = 1 \cdot a = a$
+  \item коммутативность: $\forall a, b \to ab=ba$
+  \item обратимость: $\forall K \ni g\ne 0 \to \exists b : gb = bg = 1$
 \end{itemize}
 
 \begin{define*}
@@ -67,26 +67,26 @@
   $\set{0}$~--- коммутативное кольцо, да. Можно называть его тривиальным.
 \end{example}
 
-Чем отличается $Z$ от просто коммутативного кольца? В нём нет делителей нуля.
+Чем отличается $\Z$ от просто коммутативного кольца? В нём нет делителей нуля.
 
 \begin{define*}
   Область целостности~--- коммутативное кольцо, в котором нет делителей нуля.
 \end{define*}
 
 \begin{example}[делителя нуля]
-    $2\cdot3 = 0$ в $Z_6$.
+    $2\cdot3 = 0$ в $\Z_6$.
 \end{example}
 
-Рассмотрим множество $\Set{a+b\cdot z | a,b \in Z, z \in C}$. Это кольцо?
+Рассмотрим множество $\Set{a+b\cdot z | a,b \in \Z, z \in \setC}$. Это кольцо?
 
-Рассмотрим гауссовы числа: $\Set{a+bi | a,b \in Z} = Z[i]$.
+Рассмотрим гауссовы числа: $\Set{a+bi | a,b \in \Z} = \Z[i]$.
 
 \begin{itemize}
-    \item $(a+bi)+(c+di) = (a+c)+ (b+d)i \in Z[i]$
-    \item $(a+bi)\cdot(c+di) = (ac-bd) + (ad+bc)i \in Z[i]$
-    \item $0 + 0i \in Z[i]$
-    \item $1 + 0i \in Z[i]$
-    \item $a+bi \in Z[i] \Rightarrow (-a) + (-b)i \in Z[i]$
+    \item $(a+bi)+(c+di) = (a+c)+ (b+d)i \in \Z[i]$
+    \item $(a+bi)\cdot(c+di) = (ac-bd) + (ad+bc)i \in \Z[i]$
+    \item $0 + 0i \in \Z[i]$
+    \item $1 + 0i \in \Z[i]$
+    \item $a+bi \in \Z[i] \Rightarrow (-a) + (-b)i \in \Z[i]$
     \item нет делителей нуля
 \end{itemize}
 
@@ -94,7 +94,7 @@
   $F$~--- поле, если
   \begin{itemize}
     \item это коммутативное кольцо
-      \item $\forall a\ne 0 \in F \rightarrow \exists b \in F : ab = ba = 1$
+      \item $\forall a\ne 0 \in F \to \exists b \in F : ab = ba = 1$
       \item $1 \ne 0$
   \end{itemize}
 \end{define*}
@@ -112,23 +112,23 @@
 \end{proof}
 
 Пусть $K$~--- область целостности.
-$a|b \Leftrightarrow \exists c : ac = b$.
+$a \mid b \Leftrightarrow \exists c : ac = b$.
 
 Свойства делимости:
 
 \begin{enumerate}
-  \item $a | b, b | c \Rightarrow a | c$
-    \item $a | b, a | c \Rightarrow a | (b+c)$
-    \item $a | 1 \Rightarrow \exists b : ab = 1 \Rightarrow a$~--- обратимый элемент.
+  \item $a \mid b, b \mid c \Rightarrow a \mid c$
+    \item $a \mid b, a \mid c \Rightarrow a \mid (b+c)$
+    \item $a \mid 1 \Rightarrow \exists b : ab = 1 \Rightarrow a$~--- обратимый элемент.
       В этом случае любой элемент $K$ делится на $a$.
 
       \begin{proof}
-        Пусть $x\in K$. Тогда $x = 1\cdot x = a(a^{-1}x) \Rightarrow a|x$
+        Пусть $x\in K$. Тогда $x = 1\cdot x = a(a^{-1}x) \Rightarrow a\mid x$
       \end{proof}
 \end{enumerate}
 
 \begin{example}
-  В $Z$ обратимых элемента два: $1, -1$.
+  В $\Z$ обратимых элемента два: $1, -1$.
 \end{example}
 
 \begin{define*}
@@ -155,7 +155,7 @@ $a|b \Leftrightarrow \exists c : ac = b$.
   \begin{enumerate}
     \item простые числа делятся на себя и на 1.
     \item любое число раскладывается в произведение простых.
-    \item $p$ простое $\Rightarrow ab : p \Longrightarrow a:p \lor b:p$
+    \item $p$ простое $\Rightarrow p \mid ab \Longrightarrow p \mid a \lor p \mid b$
     \item единственность разложения на простые.
   \end{enumerate}
 \end{proof}
@@ -172,7 +172,7 @@ $a|b \Leftrightarrow \exists c : ac = b$.
   $x \in K$ называется простым, если
   \begin{enumerate}
     \item $x \not\in K^* \cup \set{0}$.
-    \item $x | ab \Longrightarrow x | a \lor x | b$.
+    \item $x \mid ab \Longrightarrow x \mid a \lor x \mid b$.
   \end{enumerate}
 \end{define*}
 
